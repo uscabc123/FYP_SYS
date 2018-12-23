@@ -1,0 +1,132 @@
+﻿@model FYP.Models.User
+
+@{
+    /**/
+
+    Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        padding-top: 30px;
+    }
+</style>
+
+@using (Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+<form>
+
+    <div class="container">
+        <div class="page-header">
+
+            <fieldset>
+
+                <h1>User Detail</h1>
+            </fieldset>
+        </div>
+
+        <div class="form-group">
+
+
+            <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-search"></span>
+
+                @Html.TextBoxFor(model => model.searchuser, new { @class = "form-control", placeholder = "Please enter user detail (IC/Passport no OR Email OR UserID) to search" })
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-12">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+            <br />
+            <table class="table table-hover">
+                <thead>
+
+                    <tr class="info">
+                        <th scope="col">
+                            No.
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.FName)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.LName)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </th>
+
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.ICPassport)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.UserStatusListValue)
+                        </th>
+
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.UserRoleListValue)
+                        </th>
+                        <th scope="col">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int rowNum = 0;
+                        if (Model == null)
+                        {
+                            <tr></tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.userdata)
+                            {
+                                <tr>
+                                    <td>
+                                        @(rowNum += 1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ICPassport)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserStatusListValue)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserRoleListValue)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Edit", "AddUser", new { id = item.UserID }) |
+                                        @Html.ActionLink("Update", "Update", new { id = item.UserID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                                    </td>
+                                </tr>
+
+                            }
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+}
