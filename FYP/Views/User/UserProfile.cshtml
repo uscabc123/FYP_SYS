@@ -1,0 +1,144 @@
+﻿@model FYP.Models.User
+
+
+
+@{
+    ViewBag.Title = "Doggy";
+    var genderlist = new List<SelectListItem>()
+{
+
+new SelectListItem() { Text = "Male", Value = "0" },
+new SelectListItem() { Text = "Female", Value = "1" }
+
+};
+
+    ViewBag.gender = new SelectList(genderlist, "Value", "Text");
+
+}
+<style>
+    body {
+        padding-top: 30px;
+    }
+    .form-control::-moz-placeholder {
+        color: #000000;
+        opacity: 1;
+    }
+
+    .form-control:-ms-input-placeholder {
+        color: #000000;
+    }
+
+    .form-control::-webkit-input-placeholder {
+        color: #000000;
+    }
+  
+</style>
+
+
+@using (Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+
+
+<form>
+    <div class="container">
+        <div class="page-header">
+            <fieldset>
+                <h1>Add New User</h1>
+            </fieldset>
+
+        </div>
+        @if (ViewData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                <p><strong>Error:</strong> @ViewData["Error"].ToString()</p>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">
+                <p><strong>Success:</strong> @TempData["Success"].ToString()</p>
+            </div>
+        }
+    
+           
+            <div class="form-group">
+                <div class="input-group">
+
+                    <label class="control-label">
+                        User ID: @ViewData["UserID"]
+                    </label>
+                    </div>
+                    <br />
+                    <label class="control-label">
+                        Full Name
+                    </label>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        @Html.TextBoxFor(model => model.FName, new { @class = "form-control", @placeholder = ViewData["FName"] })
+
+                        @Html.ValidationMessageFor(model => model.FName, null, new { @class = "text-danger" })
+
+                        <span class="input-group-addon"></span>
+
+                        @Html.TextBoxFor(model => model.LName, new { @class = "form-control", @placeholder = ViewData["LName"] })
+                        @Html.ValidationMessageFor(m => m.LName, null, new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">
+                        Email
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = ViewData["Email"] })
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        IC/Passport No.
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        @Html.TextBoxFor(model => model.ICPassport, new { @class = "form-control", @placeholder = ViewData["ICPassport"] })
+                        @Html.ValidationMessageFor(model => model.ICPassport, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Contact Number
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @placeholder = ViewData["PhoneNumber"] })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+
+
+            </div>
+       
+        <div />
+
+</form>
+
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        <div class="col-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

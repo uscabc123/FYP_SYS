@@ -23,7 +23,6 @@ namespace FYP.Models
 
     //    public string ReturnURL { get; set; }
 
-        public bool isRemember { get; set; }
 
     }
 }

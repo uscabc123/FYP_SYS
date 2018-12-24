@@ -175,10 +175,6 @@ namespace FYP.Models
                 cmd.Parameters.AddWithValue("@Password", login.Password);
 
                 con.Open();
-
-
-
-
                 SqlParameter returnParameter = cmd.Parameters.Add("@responseMessage", SqlDbType.Int);
                 returnParameter.Direction = ParameterDirection.ReturnValue;
                 cmd.ExecuteNonQuery();
@@ -186,7 +182,7 @@ namespace FYP.Models
                 int message = (int)returnParameter.Value;
 
             
-                    con.Close();
+                con.Close();
 
                 return message;
 
@@ -195,7 +191,38 @@ namespace FYP.Models
         }
 
 
-       
+
+
+        public User Profile(string email)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+
+                User user = new User();
+                SqlCommand cmd = new SqlCommand("spGetUserProfile", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                cmd.Parameters.AddWithValue("@loginemail", email);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    user.UserID = rdr["UserID"].ToString();
+                    user.Email = rdr["Email"].ToString();
+                    user.ICPassport = rdr["IC_Passport"].ToString();
+                    user.PhoneNumber = rdr["Phone_no"].ToString();
+                    user.FName = rdr["FirstName"].ToString();
+                    user.LName = rdr["LastName"].ToString();
+                }
+
+                return user;
+
+            }
+        }
+
 
 
 

@@ -66,6 +66,7 @@ namespace FYP.Models
 
 
             public List<User> userdata { get; set; }
+        public List<User> userprofile { get; set; }
 
     }
 }

@@ -28,51 +28,53 @@ new SelectListItem() { Text = "Female", Value = "1" }
     @Html.AntiForgeryToken()
 
 
-    <form>
-        <div class="container">
-            <div class="page-header">
-                <fieldset>
-                    <h1>Add New User</h1>
-                </fieldset>
+<form>
+    <div class="container">
+        <div class="page-header">
+            <fieldset>
+                <h1>Add New User</h1>
+            </fieldset>
 
+        </div>
+        @if (ViewData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                <p><strong>Error:</strong> @ViewData["Error"].ToString()</p>
             </div>
-            <div />
-            @if (ViewData["Error"] != null)
-            {
-                <div class="alert alert-danger">
-                    <p><strong>Error:</strong> @ViewData["Error"].ToString()</p>
-                </div>
-            }
-            @if (TempData["Success"] != null)
-            {
-                <div class="alert alert-success">
-                    <p><strong>Success:</strong> @TempData["Success"].ToString()</p>
-                </div>
-            }
-
-
-            <div class="form-group">
-                <label class="control-label" for="email">
-                    Email
-                </label>
-
-                <div class="input-group">
-                    <span class="input-group-addon glyphicon glyphicon-check"></span>
-                    @Html.TextBoxFor(model => model.FName, new { @class = "form-control", placeholder = "First Name" })
-
-                    @Html.ValidationMessageFor(model => model.FName, null, new { @class = "text-danger" })
-
-                    <span class="input-group-addon"></span>
-
-                    @Html.TextBoxFor(model => model.LName, new { @class = "form-control", placeholder = "Last Name" })
-                    @Html.ValidationMessageFor(m => m.LName, null, new { @class = "text-danger" })
-
-                </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">
+                <p><strong>Success:</strong> @TempData["Success"].ToString()</p>
             </div>
+        }
 
+
+        <div class="form-group">
+            <label class="control-label">
+                Full Name
+            </label>
 
             <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-check"></span>
+                <span class="input-group-addon"></span>
+                @Html.TextBoxFor(model => model.FName, new { @class = "form-control", placeholder = "First Name" })
+
+                @Html.ValidationMessageFor(model => model.FName, null, new { @class = "text-danger" })
+
+                <span class="input-group-addon"></span>
+
+                @Html.TextBoxFor(model => model.LName, new { @class = "form-control", placeholder = "Last Name" })
+                @Html.ValidationMessageFor(m => m.LName, null, new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                Gender
+            </label>
+
+            <div class="input-group">
+                <span class="input-group-addon"></span>
                 @Html.DropDownListFor(m => m.Gender, ViewBag.gender as SelectList, "-----Please select gender-----", new { @class = "form-control" })
 
 
@@ -80,46 +82,65 @@ new SelectListItem() { Text = "Female", Value = "1" }
 
             </div>
 
+        </div>
 
-
-            <br />
+        <div class="form-group">
+            <label class="control-label">
+                Email
+            </label>
             <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-envelope"></span>
+                <span class="input-group-addon"></span>
                 @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
                 @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
 
             </div>
-            <br />
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                IC/Passport No.
+            </label>
             <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-info-sign"></span>
+                <span class="input-group-addon"></span>
                 @Html.TextBoxFor(model => model.ICPassport, new { @class = "form-control", placeholder = "IC/Passport Number" })
                 @Html.ValidationMessageFor(model => model.ICPassport, null, new { @class = "text-danger" })
-
             </div>
-            <br />
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                Contact Number
+            </label>
             <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-phone"></span>
+                <span class="input-group-addon"></span>
                 @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Contact Number" })
                 @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
 
             </div>
-            <br />
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+Account Status            </label>
             <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon glyphicon-th-list"></span>
+                <span class="input-group-addon"></span>
                 @Html.DropDownListFor(m => m.UserStatusID, ViewBag.statusList as SelectList, "---Please Select Account Status---", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.UserStatusID, null, new { @class = "text-danger" })
-
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+User Role            </label>
+            <div class="input-group">
                 <span class="input-group-addon"></span>
                 @Html.DropDownListFor(m => m.UserRoleID, ViewBag.Role as SelectList, "---Please Select User Role---", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.UserRoleID, null, new { @class = "text-danger" })
 
             </div>
-
-
-
         </div>
 
-    </form>
+
+    </div>
+        <div />
+
+</form>
 
     @Html.ValidationSummary(true)
     <div class="form-group">
