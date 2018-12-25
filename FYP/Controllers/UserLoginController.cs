@@ -17,6 +17,7 @@ namespace FYP.Controllers
         // GET: UserLogin/Create
         public ActionResult Login()
         {
+            Logout();
             return View();
         }
 
@@ -46,6 +47,15 @@ namespace FYP.Controllers
                     {
                     
                     Session["Email"] = login.Username;
+
+                    string useremail = Session["Email"].ToString();
+                    var useracc =  userdata.getUserData(useremail);
+
+                    Session["RoleID"] = useracc.role;
+                    Session["StatusID"] = useracc.status;
+                    Session["Fname"] = useracc.Fname;
+                    Session["Lname"] = useracc.Lname;
+
                     return RedirectToAction("UserProfile", "User");
                 }
 
@@ -56,11 +66,11 @@ namespace FYP.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            Session["id1"] = null;
-            Session["id2"] = null;
-            Session["id3"] = null;
-            Session["id4"] = null;
-            Session["Region"] = null;
+            Session["RoleID"] = null;
+            Session["StatusID"] = null;
+            Session["Fname"] = null;
+            Session["Lname"] = null;
+            Session["Email"] = null;
             Session.Clear();
             Session.RemoveAll();
             Session.Abandon();

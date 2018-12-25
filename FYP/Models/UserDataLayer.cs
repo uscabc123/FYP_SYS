@@ -190,7 +190,34 @@ namespace FYP.Models
 
         }
 
+        public Login getUserData(string email)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                Login userdetail = new Login();
+                SqlCommand cmd = new SqlCommand("spGetUserProfile", con);
+                cmd.CommandType = CommandType.StoredProcedure;
 
+
+                cmd.Parameters.AddWithValue("@loginemail", email);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+
+                    userdetail.Fname = rdr["FirstName"].ToString();
+                    userdetail.Lname = rdr["LastName"].ToString();
+                    userdetail.role = Convert.ToInt32(rdr["RoleID"]);
+                    userdetail.status = Convert.ToInt32(rdr["StatusID"]);
+                    userdetail.gender = Convert.ToInt32(rdr["Gender"]);
+                }
+                return userdetail;
+
+            }
+
+        }
 
 
         public User Profile(string email)

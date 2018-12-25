@@ -93,19 +93,17 @@ namespace FYP.Controllers
 
         public ActionResult UserProfile()
         {
-            string emailvalue = Session["Email"].ToString();
+          string emailvalue = Session["Email"].ToString();
 
           var profile =  userdata.Profile(emailvalue);
 
             User userprofile = new User();
-           ViewData["FName"] = profile.FName;
+            ViewData["FName"] = profile.FName;
             ViewData["LName"] = profile.LName;
             ViewData["PhoneNumber"] = profile.PhoneNumber;
             ViewData["UserID"] = profile.UserID;
             ViewData["Email"] = profile.Email;
             ViewData["ICPassport"] = profile.ICPassport;
-
-
             return View();
 
 
