@@ -106,11 +106,21 @@ namespace FYP.Controllers
             ViewData["ICPassport"] = profile.ICPassport;
             return View();
 
-
-          
-
         }
 
+        [HttpGet]
+        public ActionResult ForgetPassword()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgetPassword(string email)
+        {
+
+            return View();
+        }
 
     }
 

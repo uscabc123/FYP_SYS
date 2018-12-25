@@ -1,0 +1,27 @@
+﻿
+@model FYP.Models.Announcement
+
+
+
+
+
+
+
+@using (Html.BeginForm("Create", "Announcement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <form>
+        <div class="container">
+            <div class="page-header">
+                <fieldset>
+                    <h1>Add Announcement</h1>
+                </fieldset>
+
+            </div>
+            <label for="file">Upload Image:</label>
+            <input type="file" name="file" id="file" style="width: 100%;" />
+
+            <input type="submit" value="Upload" class="submit" />
+            </div>
+    </form>
+            }

@@ -4,29 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace FYP.Models
+namespace FYP.Controllers
 {
-    public class AddAnnouncementController : Controller
+    public class AppointmentController : Controller
     {
-        // GET: AddAnnouncement
+        // GET: Appointment
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: AddAnnouncement/Details/5
+        // GET: Appointment/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: AddAnnouncement/Create
+        // GET: Appointment/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AddAnnouncement/Create
+        // POST: Appointment/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -42,13 +42,13 @@ namespace FYP.Models
             }
         }
 
-        // GET: AddAnnouncement/Edit/5
+        // GET: Appointment/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: AddAnnouncement/Edit/5
+        // POST: Appointment/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -64,13 +64,13 @@ namespace FYP.Models
             }
         }
 
-        // GET: AddAnnouncement/Delete/5
+        // GET: Appointment/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: AddAnnouncement/Delete/5
+        // POST: Appointment/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

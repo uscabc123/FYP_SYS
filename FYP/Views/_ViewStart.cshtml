@@ -1,12 +1,28 @@
 ﻿@{
-    if(Session["Email"] == null)
+    if (Session["RoleID"] == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
 
     }
-    else
-    {
+    else if(Session["RoleID"].ToString() == "1")
+{
         Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
     }
-}
+else if (Session["RoleID"].ToString() == "2")
+    {
+        Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+
+    }
+
+    else if (Session["RoleID"].ToString() == "3")
+    {
+        Layout = "~/Views/Shared/_LayoutNurse.cshtml";
+    }
+    else if (Session["RoleID"].ToString() == "4")
+    {
+        Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+
+    }
+
+    }

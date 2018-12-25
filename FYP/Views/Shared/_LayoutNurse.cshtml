@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">@ViewBag.Title</a>
+                <a class="navbar-brand" href="#">@ViewBag.Title Nurse</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -55,11 +55,28 @@
                 </ul>
 
                 <div class="btn-group pull-right">
-                    <a class="btn btn-secondary dropdown-toggle" href="#">
-                        <span class="glyphicon glyphicon-user"></span>
-                        Disabled
-                    </a>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                <span class="glyphicon glyphicon-log-out"></span>
+                                @Session["Fname"] @Session["Lname"]
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../User/AddUser" class="elements">Create</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../UserLogin/Login"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 
+
+
+
+                    </ul>
                 </div>
             </div><!--/.nav-collapse -->
         </div>
