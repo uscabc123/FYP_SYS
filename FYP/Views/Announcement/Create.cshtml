@@ -18,10 +18,26 @@
                 </fieldset>
 
             </div>
-            <label for="file">Upload Image:</label>
-            <input type="file" name="file" id="file" style="width: 100%;" />
+          
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Title)
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
 
-            <input type="submit" value="Upload" class="submit" />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Content)
+                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Content)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Path)
+                    @Html.TextBoxFor(m => m.Path, new { @class = "form-control", type ="file" })
+                    @Html.ValidationMessageFor(m => m.Path)
+                </div>
+
+                <button type="submit" class="btn btn-primary">Post Now</button>
             </div>
-    </form>
+</form>
             }

@@ -17,7 +17,7 @@ namespace FYP.Models
         [Required]
         public string Content { get; set; }
 
-        public string path { get; set; }
+        public string Path { get; set; }
 
 
     }
