@@ -11,7 +11,7 @@ namespace FYP.Models
 {
     public class Login
     {
-        public string   UserID { get; set; }
+        public string UserID { get; set; }
 
         public string Fname { get; set; }
         public string Lname { get; set; }
@@ -26,7 +26,7 @@ namespace FYP.Models
 
         public string Password { get; set; }
 
-    
+
 
     }
 }

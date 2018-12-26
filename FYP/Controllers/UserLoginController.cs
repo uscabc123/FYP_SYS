@@ -25,31 +25,31 @@ namespace FYP.Controllers
         [HttpPost]
         public ActionResult Login(Login login)
         {
-            
-                  if(ModelState.IsValid)
-                  {
-                    int message  = userdata.login(login);
 
-                    if (message == 1)
-                    {
-                         TempData["Error"] = "Invalid login detail";
+            if (ModelState.IsValid)
+            {
+                int message = userdata.login(login);
+
+                if (message == 1)
+                {
+                    TempData["Error"] = "Invalid login detail";
 
                     return RedirectToAction("Login");
-                    }
-                    else if (message == 2)
-                     {
-                  
-                        TempData["Error"] = "Your account currently inactive. Please contact with administration for more information";
+                }
+                else if (message == 2)
+                {
 
-                        return RedirectToAction("Login");
-                    }
-                    else
-                    {
-                    
+                    TempData["Error"] = "Your account currently inactive. Please contact with administration for more information";
+
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+
                     Session["Email"] = login.Username;
 
                     string useremail = Session["Email"].ToString();
-                    var useracc =  userdata.getUserData(useremail);
+                    var useracc = userdata.getUserData(useremail);
 
                     Session["RoleID"] = useracc.role;
                     Session["StatusID"] = useracc.status;
@@ -82,8 +82,8 @@ namespace FYP.Controllers
 
             return RedirectToAction("Index", "Login");
         }
-     
-    
+
+
 
     }
 }

@@ -92,7 +92,7 @@ namespace FYP.Models
                 cmd.ExecuteNonQuery();
 
                 int id = (int)returnParameter.Value;
-              
+
 
                 con.Close();
                 return id;
@@ -132,7 +132,7 @@ namespace FYP.Models
         }
         public List<User> GetAllUser()
         {
-                 List<User> userlist = new List<User>();
+            List<User> userlist = new List<User>();
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -159,7 +159,7 @@ namespace FYP.Models
 
                 con.Close();
             }
-                return userlist;            
+            return userlist;
         }
 
 
@@ -170,7 +170,7 @@ namespace FYP.Models
                 SqlCommand cmd = new SqlCommand("spLogin", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-              
+
                 cmd.Parameters.AddWithValue("@Email", login.Username);
                 cmd.Parameters.AddWithValue("@Password", login.Password);
 
@@ -181,7 +181,7 @@ namespace FYP.Models
 
                 int message = (int)returnParameter.Value;
 
-            
+
                 con.Close();
 
                 return message;
