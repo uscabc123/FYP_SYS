@@ -55,6 +55,7 @@ namespace FYP.Controllers
                     Session["StatusID"] = useracc.status;
                     Session["Fname"] = useracc.Fname;
                     Session["Lname"] = useracc.Lname;
+                    Session["UserID"] = useracc.UserID;
 
                     return RedirectToAction("UserProfile", "User");
                 }

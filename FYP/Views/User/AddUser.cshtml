@@ -36,10 +36,10 @@ new SelectListItem() { Text = "Female", Value = "1" }
             </fieldset>
 
         </div>
-        @if (ViewData["Error"] != null)
+        @if (TempData["Error"] != null)
         {
             <div class="alert alert-danger">
-                <p><strong>Error:</strong> @ViewData["Error"].ToString()</p>
+                <p><strong>Error:</strong> @TempData["Error"].ToString()</p>
             </div>
         }
         @if (TempData["Success"] != null)
@@ -119,7 +119,7 @@ User Role            </label>
         </div>
 
 
-        <div />
+        </div>
 
 </form>
 

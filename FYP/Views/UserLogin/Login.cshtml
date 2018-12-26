@@ -44,7 +44,7 @@
                                                 @Html.ValidationMessageFor(model => model.Username, null, new { @class = "text-danger" })
 
                                             </div>
-                                            <asp:Label ID="lblErrUserName" CssClass="help-block" runat="server" Text="" ForeColor="White"></asp:Label>
+                                          
                                         </div>
 
                                         <label class="col-md-12 control-label" for="prependedcheckbox">
@@ -58,10 +58,10 @@
                                                 @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
 
                                             </div>
-                                            <asp:Label ID="lblErrPassword" CssClass="help-block" runat="server" Text="" ForeColor="White"></asp:Label>
                                         </div>
-                                        
-                                        <div class="col-md-4 text-center" style="width: 100%">
+                                      
+                                        <div class="input-group text-center" style="width: 100%">
+                                           <br />
                                             <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />
 
                                         </div>

@@ -177,6 +177,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Announcement.cs" />
+    <Compile Include="Models\AnnouncementDataLayer.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Login.cs" />
@@ -271,7 +272,8 @@
     <Content Include="Views\Shared\_LayoutPatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\Announcement\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

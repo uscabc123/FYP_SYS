@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FYP.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +10,8 @@ namespace FYP.Controllers
 {
     public class AnnouncementController : Controller
     {
+        AnnouncementDataLayer announcedata = new AnnouncementDataLayer();
+
         // GET: Announcement
         public ActionResult Index()
         {
@@ -23,23 +27,62 @@ namespace FYP.Controllers
         // GET: Announcement/Create
         public ActionResult Create()
         {
+
+            var statuslist = announcedata.GetStatusData();
+            ViewBag.Status = new SelectList(statuslist, "comboStatusID", "comboStatusValue");
             return View();
         }
 
         // POST: Announcement/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind]Announcement announce, HttpPostedFileBase file)
         {
-            try
-            {
-                // TODO: Add insert logic here
+           
+                if (!ModelState.IsValid)
+                {
+                        var statuslist = new AnnouncementDataLayer().GetStatusData();
+                        ViewBag.ComboStatus = new SelectList(statuslist, "comboStatusID", "comboStatusValue");
+                        return View();
+                }
+                else
+                {
+                var statuslist = new AnnouncementDataLayer().GetStatusData();
+                ViewBag.ComboStatus = new SelectList(statuslist, "comboStatusID", "comboStatusValue");
+                if (file != null && file.ContentLength > 0)
+                {
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                    string ImageName = System.IO.Path.GetFileName(file.FileName);
+                    string ImagePath = System.IO.Path.Combine(Server.MapPath("~/Upload/"),ImageName);
+
+                        file.SaveAs(ImagePath);
+
+                        announce.Path = "~/Upload/" + ImageName;
+                        announce.CreatedBy = Session["UserID"].ToString();
+                        announce.AnnouncementDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        announce.Path = "N/A";
+                        announce.CreatedBy = Session["UserID"].ToString();
+                        announce.AnnouncementDate = DateTime.Now;
+                    }
+
+                    int status = announcedata.AddAnnouncement(announce);
+                    if(status == 1)
+                    {
+                        TempData["Success"] = "New Announcement Added Successfully.";
+                    }
+                    else
+                    {
+                        TempData["Error"] = "New Announcement Added Failed.";
+
+                    }
+                     return View();
+
+
+                }
+                
+         
         }
 
         // GET: Announcement/Edit/5

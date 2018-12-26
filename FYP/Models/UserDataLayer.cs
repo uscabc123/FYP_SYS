@@ -206,7 +206,7 @@ namespace FYP.Models
 
                 while (rdr.Read())
                 {
-
+                    userdetail.UserID = rdr["UserID"].ToString();
                     userdetail.Fname = rdr["FirstName"].ToString();
                     userdetail.Lname = rdr["LastName"].ToString();
                     userdetail.role = Convert.ToInt32(rdr["RoleID"]);

@@ -2,11 +2,6 @@
 @model FYP.Models.Announcement
 
 
-
-
-
-
-
 @using (Html.BeginForm("Create", "Announcement", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -18,26 +13,48 @@
                 </fieldset>
 
             </div>
-          
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Title)
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Title)
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    <p><strong>Error:</strong> @TempData["Error"].ToString()</p>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Content)
-                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Content)
+            }
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">
+                    <p><strong>Success:</strong> @TempData["Success"].ToString()</p>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Path)
-                    @Html.TextBoxFor(m => m.Path, new { @class = "form-control", type ="file" })
-                    @Html.ValidationMessageFor(m => m.Path)
-                </div>
-
-                <button type="submit" class="btn btn-primary">Post Now</button>
+            }
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title)
             </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Content)
+                @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Content)
+            </div>
+
+            <div class="form-group">
+                <label for="file">Upload Image:</label>
+                <input type="file" name="file" id="file" style="width: 100%;" />
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Status)
+                @Html.DropDownListFor(m => m.Status, ViewBag.ComboStatus as SelectList, "---Please Select Announcement Status---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Status)
+            </div>
+
+
+            <div class="input-group text-center" style="width: 100%">
+                <br />
+                <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />
+
+            </div>
+
+        </div>
 </form>
             }

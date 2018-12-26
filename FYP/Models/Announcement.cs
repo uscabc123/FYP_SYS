@@ -9,9 +9,8 @@ namespace FYP.Models
     public class Announcement
     {
 
-        public string AnnouncemntID { get; set; }
+        public int AnnouncemntID { get; set; }
 
-        public string UserID { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
@@ -19,6 +18,16 @@ namespace FYP.Models
 
         public string Path { get; set; }
 
+
+        public DateTime AnnouncementDate { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public int Status { get; set; }
+
+
+        public int comboStatusID { get; set; }
+        public string comboStatusValue { get; set; }
 
     }
 }
