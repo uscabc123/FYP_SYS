@@ -4,9 +4,13 @@
 
 @{
     ViewBag.Title = "Doggy";
-  
-
+ 
 }
+<style>
+    body {
+        padding-top: 30px;
+    }
+</style>
 
 
 @using (Html.BeginForm())
@@ -19,7 +23,7 @@
     <div class="container">
         <div class="page-header">
             <fieldset>
-                <h1>User Profile</h1>
+                <h1>Edit User Profile</h1>
             </fieldset>
 
         </div>
@@ -38,23 +42,21 @@
 
 
         <div class="form-group">
-                <div class="form-group">
-                    <label class="control-label">
-                        User ID
+            <div class="form-group">
+                <label class="control-label">
+                    User ID
 
-                    </label>
-                    <div class="form-control">
+                </label>
+                <div class="form-control">
 
-                        @ViewData["UserID"]
-                    </div>
-
-
+                    @ViewData["UserID"]
                 </div>
-           
-           <label class="control-label">
+
+
+            </div>
+            <label class="control-label">
                 Full Name
             </label>
-
             <div class="input-group">
                 @Html.TextBoxFor(model => model.FName, new { @class = "form-control", placeholder = "First Name", @Value = ViewData["FName"] })
 
@@ -62,7 +64,7 @@
 
                 <span class="input-group-addon"></span>
 
-                @Html.TextBoxFor(model => model.LName, new { @class = "form-control",  placeholder = "Last Name", @Value = ViewData["LName"] })
+                @Html.TextBoxFor(model => model.LName, new { @class = "form-control", placeholder = "Last Name", @Value = ViewData["LName"] })
                 @Html.ValidationMessageFor(m => m.LName, null, new { @class = "text-danger" })
 
             </div>
@@ -79,12 +81,13 @@
 
 
         </div>
+
         <div class="form-group">
             <label class="control-label">
                 Email
             </label>
 
-            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @Value = ViewData["Email"] })
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email", @Value = ViewData["Email"] })
             @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
 
         </div>
@@ -92,32 +95,54 @@
             <label class="control-label">
                 IC/Passport No.
             </label>
-            @Html.TextBoxFor(model => model.ICPassport, new { @class = "form-control", @Value = ViewData["ICPassport"] })
+
+            @Html.TextBoxFor(model => model.ICPassport, new { @class = "form-control", placeholder = "IC/Passport Number", @Value = ViewData["ICPassport"] })
             @Html.ValidationMessageFor(model => model.ICPassport, null, new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label class="control-label">
                 Contact Number
             </label>
-            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @Value = ViewData["PhoneNumber"] })
+
+            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Contact Number", @Value = ViewData["PhoneNumber"] })
             @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                Account Status
+            </label>
+
+            @Html.DropDownListFor(m => m.UserStatusID, ViewBag.statusList as SelectList, "---Please Select Account Status---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UserStatusID, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">
+                User Role
+            </label>
+
+            @Html.DropDownListFor(m => m.UserRoleID, ViewBag.Role as SelectList, "---Please Select User Role---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UserRoleID, null, new { @class = "text-danger" })
+
         </div>
 
 
-
     </div>
-       
-        <div />
+    <div />
 
 </form>
 
-    @Html.ValidationSummary(true)
+
     <div class="form-group">
         <div class="col-12 text-center">
             <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />
         </div>
     </div>
 }
+
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+

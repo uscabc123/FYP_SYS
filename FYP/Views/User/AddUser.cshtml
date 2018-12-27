@@ -7,13 +7,11 @@
     var genderlist = new List<SelectListItem>()
 {
 
-new SelectListItem() { Text = "Male", Value = "0" },
-new SelectListItem() { Text = "Female", Value = "1" }
+new SelectListItem() {  Value = "0", Text = "Male"},
+new SelectListItem() {Value = "1", Text = "Female"}
 
 };
-
     ViewBag.gender = new SelectList(genderlist, "Value", "Text");
-
 }
 <style>
     body {
@@ -50,82 +48,83 @@ new SelectListItem() { Text = "Female", Value = "1" }
             }
 
 
-                <div class="form-group">
-                    <label class="control-label">
-                        Full Name
-                    </label>
-                    <div class="input-group">
-                        @Html.TextBoxFor(model => model.FName, new { @class = "form-control", placeholder = "First Name" })
+            <div class="form-group">
+               
+                <label class="control-label">
+                    Full Name
+                </label>
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.FName, new { @class = "form-control", placeholder = "First Name" })
 
-                        @Html.ValidationMessageFor(model => model.FName, null, new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.FName, null, new { @class = "text-danger" })
 
-                        <span class="input-group-addon"></span>
+                    <span class="input-group-addon"></span>
 
-                        @Html.TextBoxFor(model => model.LName, new { @class = "form-control", placeholder = "Last Name" })
-                        @Html.ValidationMessageFor(m => m.LName, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(model => model.LName, new { @class = "form-control", placeholder = "Last Name" })
+                    @Html.ValidationMessageFor(m => m.LName, null, new { @class = "text-danger" })
 
-                    </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Gender
-                        </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Gender
+                </label>
 
-                        @Html.DropDownListFor(m => m.Gender, ViewBag.gender as SelectList, "-----Please select gender-----", new { @class = "form-control" })
-
-
-                        @Html.ValidationMessageFor(model => model.Gender, null, new { @class = "text-danger" })
+                @Html.DropDownListFor(m => m.Gender, ViewBag.gender as SelectList, "-----Please select gender-----", new { @class = "form-control" })
 
 
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">
-                            Email
-                        </label>
-
-                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
-                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
-
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            IC/Passport No.
-                        </label>
-
-                        @Html.TextBoxFor(model => model.ICPassport, new { @class = "form-control", placeholder = "IC/Passport Number" })
-                        @Html.ValidationMessageFor(model => model.ICPassport, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Contact Number
-                        </label>
-
-                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Contact Number" })
-                        @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
-
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">
-                            Account Status
-                        </label>
-
-                            @Html.DropDownListFor(m => m.UserStatusID, ViewBag.statusList as SelectList, "---Please Select Account Status---", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.UserStatusID, null, new { @class = "text-danger" })
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label">
-                                User Role
-                            </label>
-
-                            @Html.DropDownListFor(m => m.UserRoleID, ViewBag.Role as SelectList, "---Please Select User Role---", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.UserRoleID, null, new { @class = "text-danger" })
-
-                        </div>
+                @Html.ValidationMessageFor(model => model.Gender, null, new { @class = "text-danger" })
 
 
-                    </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">
+                    Email
+                </label>
+
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    IC/Passport No.
+                </label>
+
+                @Html.TextBoxFor(model => model.ICPassport, new { @class = "form-control", placeholder = "IC/Passport Number" })
+                @Html.ValidationMessageFor(model => model.ICPassport, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Contact Number
+                </label>
+
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Contact Number" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Account Status
+                </label>
+
+                @Html.DropDownListFor(m => m.UserStatusID, ViewBag.statusList as SelectList, "---Please Select Account Status---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserStatusID, null, new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">
+                    User Role
+                </label>
+
+                @Html.DropDownListFor(m => m.UserRoleID, ViewBag.Role as SelectList, "---Please Select User Role---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserRoleID, null, new { @class = "text-danger" })
+
+            </div>
+
+
+        </div>
         <div />
 
     </form>

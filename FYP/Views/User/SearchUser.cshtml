@@ -113,9 +113,11 @@
                                     </td>
 
                                     <td>
-                                        @Html.ActionLink("Edit", "AddUser", new { id = item.UserID }) |
-                                        @Html.ActionLink("Update", "Update", new { id = item.UserID }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+
+                                        <span class="glyphicon glyphicon-lock"> </span>@Html.ActionLink("Reset Password", "EditUser", "User", new { uid = item.UserID  }, null) |
+                                        <span class="glyphicon glyphicon-edit"></span> @Html.ActionLink("Edit User", "EditUser", "User", new { uid = item.UserID }, null) |
+                                        <span class="glyphicon glyphicon-remove"> </span>@Html.ActionLink("Delete User", "Delete", new { uid = item.UserID })
+
                                     </td>
                                 </tr>
 
