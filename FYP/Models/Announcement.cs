@@ -29,5 +29,10 @@ namespace FYP.Models
         public int comboStatusID { get; set; }
         public string comboStatusValue { get; set; }
 
+
+
+        public string searchannouncement { get; set; }
+
+
     }
 }

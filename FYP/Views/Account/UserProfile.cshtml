@@ -1,42 +1,30 @@
-﻿@model FYP.Models.User
+﻿@model FYP.Models.UserProfile
+
 
 
 @{
     ViewBag.Title = "Doggy";
-    var genderlist = new List<SelectListItem>()
-{
 
-new SelectListItem() {  Value = "0", Text = "Male"},
-new SelectListItem() {Value = "1", Text = "Female"}
 
-};
-    ViewBag.gender = new SelectList(genderlist, "Value", "Text");
 }
-<style>
-    body {
-        padding-top: 30px;
-    }
-</style>
-
-
 @using (Html.BeginForm())
-
 {
     @Html.AntiForgeryToken()
 
+    @Html.ValidationSummary(true)
 
     <form>
         <div class="container">
             <div class="page-header">
                 <fieldset>
-                    <h1>Add New User</h1>
+                    <h1>User Profile</h1>
                 </fieldset>
 
             </div>
-            @if (ViewData["Error"] != null)
+            @if (TempData["Error"] != null)
             {
                 <div class="alert alert-danger">
-                    <p><strong>Error:</strong> @ViewData["Error"].ToString()</p>
+                    <p><strong>Error:</strong> @TempData["Error"].ToString()</p>
                 </div>
             }
             @if (TempData["Success"] != null)
@@ -48,18 +36,31 @@ new SelectListItem() {Value = "1", Text = "Female"}
 
 
             <div class="form-group">
-               
+                <div class="form-group">
+                    <label class="control-label">
+                        User ID
+
+                    </label>
+                    <div class="form-control">
+
+                        @ViewData["UserID"]
+                    </div>
+
+
+                </div>
+
                 <label class="control-label">
                     Full Name
                 </label>
+
                 <div class="input-group">
-                    @Html.TextBoxFor(model => model.FName, new { @class = "form-control", placeholder = "First Name" })
+                    @Html.TextBoxFor(model => model.FName, new { @class = "form-control", placeholder = "First Name", @Value = ViewData["FName"] })
 
                     @Html.ValidationMessageFor(model => model.FName, null, new { @class = "text-danger" })
 
                     <span class="input-group-addon"></span>
 
-                    @Html.TextBoxFor(model => model.LName, new { @class = "form-control", placeholder = "Last Name" })
+                    @Html.TextBoxFor(model => model.LName, new { @class = "form-control", placeholder = "Last Name", @Value = ViewData["LName"] })
                     @Html.ValidationMessageFor(m => m.LName, null, new { @class = "text-danger" })
 
                 </div>
@@ -69,20 +70,19 @@ new SelectListItem() {Value = "1", Text = "Female"}
                     Gender
                 </label>
 
-                @Html.DropDownListFor(m => m.Gender, ViewBag.gender as SelectList, "-----Please select gender-----", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Gender, ViewBag.UserGender as SelectList, "-----Please select gender-----", new { @class = "form-control" })
 
 
                 @Html.ValidationMessageFor(model => model.Gender, null, new { @class = "text-danger" })
 
 
             </div>
-
             <div class="form-group">
                 <label class="control-label">
                     Email
                 </label>
 
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @Value = ViewData["Email"] })
                 @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
 
             </div>
@@ -90,53 +90,32 @@ new SelectListItem() {Value = "1", Text = "Female"}
                 <label class="control-label">
                     IC/Passport No.
                 </label>
-
-                @Html.TextBoxFor(model => model.ICPassport, new { @class = "form-control", placeholder = "IC/Passport Number" })
+                @Html.TextBoxFor(model => model.ICPassport, new { @class = "form-control", @Value = ViewData["ICPassport"] })
                 @Html.ValidationMessageFor(model => model.ICPassport, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label class="control-label">
                     Contact Number
                 </label>
-
-                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Contact Number" })
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @Value = ViewData["PhoneNumber"] })
                 @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
-
-            </div>
-            <div class="form-group">
-                <label class="control-label">
-                    Account Status
-                </label>
-
-                @Html.DropDownListFor(m => m.UserStatusID, ViewBag.statusList as SelectList, "---Please Select Account Status---", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.UserStatusID, null, new { @class = "text-danger" })
             </div>
 
-            <div class="form-group">
-                <label class="control-label">
-                    User Role
-                </label>
-
-                @Html.DropDownListFor(m => m.UserRoleID, ViewBag.Role as SelectList, "---Please Select User Role---", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.UserRoleID, null, new { @class = "text-danger" })
-
-            </div>
 
 
         </div>
+
         <div />
 
     </form>
 
-  
+
     <div class="form-group">
         <div class="col-12 text-center">
             <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />
         </div>
     </div>
-}
+}    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

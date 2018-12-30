@@ -14,12 +14,14 @@ namespace FYP.Controllers
             return View();
         }
 
+     
+
         // GET: Appointment/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-
+       
         // GET: Appointment/Create
         public ActionResult Create()
         {
@@ -28,20 +30,11 @@ namespace FYP.Controllers
 
         // POST: Appointment/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(string selectedDate)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            ViewBag.Message = "Selected Date: " + selectedDate;
+            return View();
         }
-
         // GET: Appointment/Edit/5
         public ActionResult Edit(int id)
         {

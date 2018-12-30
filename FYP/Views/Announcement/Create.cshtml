@@ -28,13 +28,13 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Title)
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Title)
+                @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(m => m.Content)
                 @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Content)
+                @Html.ValidationMessageFor(m => m.Content, null, new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
@@ -45,7 +45,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Status)
                 @Html.DropDownListFor(m => m.Status, ViewBag.ComboStatus as SelectList, "---Please Select Announcement Status---", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Status)
+                @Html.ValidationMessageFor(m => m.Status, null,new { @class = "text-danger" })
             </div>
 
 

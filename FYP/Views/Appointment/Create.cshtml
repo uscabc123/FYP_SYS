@@ -1,1 +1,74 @@
-﻿
+﻿@model FYP.Models.Appointment
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+<script>
+
+ 
+    $(function () {
+        $("#AppointmentDate").datepicker({
+            maxDate: "1m",
+            minDate: 0,
+            dateFormat: 'dd/mm/yy',
+            beforeShowDay: DisableSunday
+        });
+
+    });
+   
+  
+    
+        
+    function DisableSunday(date) {
+        var day = date.getDay();
+        if (day == 0) {
+            return [false, "", "Unavailable"];
+        } else {
+            return [true];
+        }
+    }
+    jQuery(function ($) {
+        $('input[name="datum"]').datepicker('option', 'beforeShowDay', DisableMonday).datepicker('refresh');
+    });
+
+
+  
+
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <form>
+        <div class="container">
+            <div class="page-header">
+                <fieldset>
+                    <h1>Add New User</h1>
+                </fieldset>
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">
+                    Date
+                </label>
+                @Html.TextBoxFor(model => model.AppointmentDate, new { @class = "form-control", placeholder = "Click the textbox and pick a date from the calendar" })
+                @Html.ValidationMessageFor(model => model.AppointmentDate, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Time
+                </label>
+               
+
+                @Html.TextBoxFor(model => model.AppointmentTime, new { @class = "form-control", placeholder = "Click the textbox and pick a date from the calendar" })
+                @Html.ValidationMessageFor(model => model.AppointmentTime, null, new { @class = "text-danger" })
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        </div>
+    </form>
+}

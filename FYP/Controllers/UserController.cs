@@ -51,18 +51,18 @@ namespace FYP.Controllers
             }
             else
             {
-                    int status = userdata.AddUser(user);
+                int status = userdata.AddUser(user);
 
-                    if (status == 2)
-                    {
-                        TempData["Success"] = "New user added successfully!";
-                        return RedirectToAction("AddUser");
-                    }
-                    else
-                    {
-                        TempData["Error"] = "Email exist in the system!";
-                        return RedirectToAction("AddUser");
-                    }
+                if (status == 2)
+                {
+                    TempData["Success"] = "New user added successfully!";
+                    return RedirectToAction("AddUser");
+                }
+                else
+                {
+                    TempData["Error"] = "Email exist in the system!";
+                    return RedirectToAction("AddUser");
+                }
             }
         }
         [HttpGet]
@@ -73,6 +73,19 @@ namespace FYP.Controllers
             var userdatalist = new User { userdata = userlist };
             return View(userdatalist);
         }
+
+        [HttpPost]
+        public ActionResult SearchUser(string search)
+        {
+            List<User> userlist = new List<User>();
+            userlist = userdata.GetAllUser();
+            var userdatalist = new User { userdata = userlist };
+            return View(userdatalist);
+        }
+
+
+
+
         [HttpGet]
         public ActionResult EditUser(string uid)
         {
@@ -110,7 +123,7 @@ namespace FYP.Controllers
             user.UserID = uid;
 
 
-         
+
             if (!ModelState.IsValid)
             {
 
@@ -139,7 +152,6 @@ namespace FYP.Controllers
             }
             else
             {
-
                 int status = userdata.UpdateUserProfile(user);
 
                 if (status == 1)
@@ -165,7 +177,6 @@ namespace FYP.Controllers
                     ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
                     TempData["Success"] = "User Profile Updated Successfully!";
 
-                    return View();
 
                 }
                 else if (status == 2)
@@ -197,12 +208,11 @@ namespace FYP.Controllers
                     ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
 
                     TempData["Error"] = "Email has been used by other user account.";
-                    return View();
-                }
+               }
             }
 
+                    return View();
 
-            return View();
         }
         [HttpGet]
 
@@ -215,141 +225,140 @@ namespace FYP.Controllers
 
 
 
-        [HttpGet]
-        public ActionResult UserProfile()
-        {
-           
-            if (string.IsNullOrEmpty(Session["Email"] as string))
-            {
-                return RedirectToAction("Login", "UserLogin");
+        //[HttpGet]
+        //public ActionResult UserProfile()
+        //{
 
-            }
-            else
-            {
-                string emailvalue = Session["Email"].ToString();
+        //    if (string.IsNullOrEmpty(Session["Email"] as string))
+        //    {
+        //        return RedirectToAction("Login", "UserLogin");
 
-                User profile = userdata.Profile(emailvalue);
+        //    }
+        //    else
+        //    {
+        //        string emailvalue = Session["Email"].ToString();
 
-                ViewData["FName"] = profile.FName;
-                ViewData["LName"] = profile.LName;
-                ViewData["PhoneNumber"] = profile.PhoneNumber;
-                ViewData["UserID"] = profile.UserID;
-                ViewData["Email"] = profile.Email;
-                ViewData["ICPassport"] = profile.ICPassport;
-                ViewData["UserGender"] = profile.Gender;
-                var genderlist = new List<SelectListItem>()
-            {
-            new SelectListItem() { Value = "0", Text = "Male"},
-            new SelectListItem() { Value = "1", Text = "Female"}
+        //        User profile = userdata.Profile(emailvalue);
 
-            };
-                ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
+        //        ViewData["FName"] = profile.FName;
+        //        ViewData["LName"] = profile.LName;
+        //        ViewData["PhoneNumber"] = profile.PhoneNumber;
+        //        ViewData["UserID"] = profile.UserID;
+        //        ViewData["Email"] = profile.Email;
+        //        ViewData["ICPassport"] = profile.ICPassport;
+        //        ViewData["UserGender"] = profile.Gender;
+        //        var genderlist = new List<SelectListItem>()
+        //    {
+        //    new SelectListItem() { Value = "0", Text = "Male"},
+        //    new SelectListItem() { Value = "1", Text = "Female"}
 
-                return View();
-            }
+        //    };
+        //        ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
 
-        }
-        [HttpPost]
-        public ActionResult UserProfile([Bind] User user)
-        {
+        //        return View();
+        //    }
 
-            if (string.IsNullOrEmpty(Session["Email"] as string))
-            {
-                return RedirectToAction("Login", "UserLogin");
-            }
-            else
-            {
-                user.UserID = Session["UserID"].ToString();
+        //}
+        //[HttpPost]
+        //public ActionResult UserProfile(User user)
+        //{
 
-                if (!ModelState.IsValid)
-                {
+        //    if (string.IsNullOrEmpty(Session["Email"] as string))
+        //    {
+        //        return RedirectToAction("Login", "UserLogin");
+        //    }
+        //    else
+        //    {
+        //        user.UserID = Session["UserID"].ToString();
 
-                    ViewData["FName"] = user.FName;
-                    ViewData["LName"] = user.LName;
-                    ViewData["PhoneNumber"] = user.PhoneNumber;
-                    ViewData["UserID"] = user.UserID;
-                    ViewData["Email"] = user.Email;
-                    ViewData["ICPassport"] = user.ICPassport;
-                    ViewData["UserGender"] = user.Gender;
+        //        if (ModelState.IsValid)
+        //        {
 
-                    var genderlist = new List<SelectListItem>()
-                    {
-                        new SelectListItem() { Value = "0", Text = "Male"},
-                        new SelectListItem() { Value = "1", Text = "Female"}
-                    };
-                    ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
+        //            ViewData["FName"] = user.FName;
+        //            ViewData["LName"] = user.LName;
+        //            ViewData["PhoneNumber"] = user.PhoneNumber;
+        //            ViewData["UserID"] = user.UserID;
+        //            ViewData["Email"] = user.Email;
+        //            ViewData["ICPassport"] = user.ICPassport;
+        //            ViewData["UserGender"] = user.Gender;
 
-                    return View();
-                }
-                else
-                {
-                   int status = userdata.UpdateProfile(user);
+        //            var genderlist = new List<SelectListItem>()
+        //            {
+        //                new SelectListItem() { Value = "0", Text = "Male"},
+        //                new SelectListItem() { Value = "1", Text = "Female"}
+        //            };
+        //            ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
 
-                    if(status == 1)
-                    {
-                        ViewData["FName"] = user.FName;
-                        ViewData["LName"] = user.LName;
-                        ViewData["PhoneNumber"] = user.PhoneNumber;
-                        ViewData["UserID"] = user.UserID;
-                        ViewData["Email"] = user.Email;
-                        ViewData["ICPassport"] = user.ICPassport;
-                        ViewData["UserGender"] = user.Gender;
-                        var genderlist = new List<SelectListItem>()
-                        {
-                            new SelectListItem() { Value = "0", Text = "Male"},
-                            new SelectListItem() { Value = "1", Text = "Female"}
-                        };
-                        ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
-                        TempData["Success"] = "User Profile Updated Successfully!";
-                       
-                        return View();
+        //            return View();
+        //        }
+        //        else
+        //        {
+        //            int status = userdata.UpdateProfile(user);
 
-                    }
-                    else if (status == 2)
+        //            if (status == 1)
+        //            {
+        //                ViewData["FName"] = user.FName;
+        //                ViewData["LName"] = user.LName;
+        //                ViewData["PhoneNumber"] = user.PhoneNumber;
+        //                ViewData["UserID"] = user.UserID;
+        //                ViewData["Email"] = user.Email;
+        //                ViewData["ICPassport"] = user.ICPassport;
+        //                ViewData["UserGender"] = user.Gender;
+        //                var genderlist = new List<SelectListItem>()
+        //                {
+        //                    new SelectListItem() { Value = "0", Text = "Male"},
+        //                    new SelectListItem() { Value = "1", Text = "Female"}
+        //                };
+        //                ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
+        //                TempData["Success"] = "User Profile Updated Successfully!";
 
-                    {
-                        string emailvalue = Session["Email"].ToString();
+        //                return View();
 
-                        User profile = userdata.Profile(emailvalue);
+        //            }
+        //            else if (status == 2)
 
-                        ViewData["FName"] = profile.FName;
-                        ViewData["LName"] = profile.LName;
-                        ViewData["PhoneNumber"] = profile.PhoneNumber;
-                        ViewData["UserID"] = profile.UserID;
-                        ViewData["Email"] = profile.Email;
-                        ViewData["ICPassport"] = profile.ICPassport;
-                        ViewData["UserGender"] = profile.Gender;
+        //            {
+        //                string emailvalue = Session["Email"].ToString();
 
-                        var genderlist = new List<SelectListItem>()
-                        {
-                            new SelectListItem() { Value = "0", Text = "Male"},
-                            new SelectListItem() { Value = "1", Text = "Female"}
-                        };
-                        ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
+        //                User profile = userdata.Profile(emailvalue);
 
-                        TempData["Error"] = "Email has been used by other user account.";
-                        return RedirectToAction("UserProfile");
-                    }
-                }
+        //                ViewData["FName"] = profile.FName;
+        //                ViewData["LName"] = profile.LName;
+        //                ViewData["PhoneNumber"] = profile.PhoneNumber;
+        //                ViewData["UserID"] = profile.UserID;
+        //                ViewData["Email"] = profile.Email;
+        //                ViewData["ICPassport"] = profile.ICPassport;
+        //                ViewData["UserGender"] = profile.Gender;
 
+        //                var genderlist = new List<SelectListItem>()
+        //                {
+        //                    new SelectListItem() { Value = "0", Text = "Male"},
+        //                    new SelectListItem() { Value = "1", Text = "Female"}
+        //                };
+        //                ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
 
-                return View();
-            }
-        }
+        //                TempData["Error"] = "Email has been used by other user account.";
+        //                return View();
+        //            }
+        //        }
+        //        return View();
 
-        [HttpGet]
-        public ActionResult ForgetPassword()
-        {
+        //    }
+        //}
+       
+        //[HttpGet]
+        //public ActionResult ForgetPassword()
+        //{
 
-            return View();
-        }
+        //    return View();
+        //}
 
-        [HttpPost]
-        public ActionResult ForgetPassword(string email)
-        {
+        //[HttpPost]
+        //public ActionResult ForgetPassword(string email)
+        //{
 
-            return View();
-        }
+        //    return View();
+        //}
 
     }
 

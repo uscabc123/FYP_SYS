@@ -19,13 +19,12 @@ namespace FYP.Models
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{7,8})$", ErrorMessage = "Invalid Contact Number")]
         public string PhoneNumber { get; set; }
             [Required]
-            [DisplayName("First Name")]
+            [DisplayName("Full Name")]
 
             [RegularExpression(@"^([a-zA-Z]+(_[a-zA-Z]+)*)(\s([a-zA-Z]+(_[a-zA-Z]+)*))*$", ErrorMessage = "Invalid First Name")]
             public string FName { get; set; }
             [Required]
             [DisplayName("Last Name")]
-
             [RegularExpression(@"^([a-zA-Z]+(_[a-zA-Z]+)*)(\s([a-zA-Z]+(_[a-zA-Z]+)*))*$", ErrorMessage = "Invalid Last Name")]
             public string LName { get; set; }
             [Required]
@@ -39,34 +38,28 @@ namespace FYP.Models
             [Required]
             public int Gender { get; set; }
 
-            [Required]
             [DisplayName("Account Status")]
             public int UserStatusID { get; set; }
-
-            public int UserRoleID { get; set; }
-            [Required]
             [DisplayName("User Role")]
+            public int UserRoleID { get; set; }
 
             public int UserRoleListID { get; set; }
-            [DisplayName("Role")]
+            //[DisplayName("Role")]
 
             public string UserRoleListValue { get; set; }
 
-            [Required]
             public int UserStatusListID { get; set; }
-            [DisplayName("Status")]
+            //[DisplayName("Status")]
 
             public string UserStatusListValue { get; set; }
 
-                public string UserPassword { get; set; }
+            //    public string UserPassword { get; set; }
 
-            public int status { get; set; }
-
-            public string searchuser { get; set; }
-
+            //public int status { get; set; }
+            //public string searchuser { get; set; }
 
             public List<User> userdata { get; set; }
-        public List<User> userprofile { get; set; }
+            //public List<User> userprofile { get; set; }
 
     }
 }
