@@ -6,17 +6,15 @@ using System.Web;
 
 namespace FYP.Models
 {
-    public class Announcement
+    public class SearchAnnouncement
     {
+        public int AnnouncemntID { get; set; }
 
-
-        [Required]
         public string Title { get; set; }
-        [Required]
+
         public string Content { get; set; }
 
         public string Path { get; set; }
-
 
         public DateTime AnnouncementDate { get; set; }
 
@@ -24,11 +22,10 @@ namespace FYP.Models
 
         public int Status { get; set; }
 
-
-        public int comboStatusID { get; set; }
         public string comboStatusValue { get; set; }
 
-
+        [Required]
+        public string searchannouncement { get; set; }
 
 
 

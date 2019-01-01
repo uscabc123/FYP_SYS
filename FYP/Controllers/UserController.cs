@@ -20,9 +20,10 @@ namespace FYP.Controllers
         [HttpGet]
         public ActionResult AddUser()
         {
-            if (Session["UserID"] == null)
+            
+            if (string.IsNullOrEmpty(Session["UserID"] as string))
             {
-                return RedirectToAction("Login", "UserLogin");
+                return RedirectToAction("Login", "Account");
 
             }
             else
@@ -66,21 +67,41 @@ namespace FYP.Controllers
             }
         }
         [HttpGet]
-        public ActionResult SearchUser()
+        public ActionResult Search()
         {
-            List<User> userlist = new List<User>();
-            userlist = userdata.GetAllUser();
-            var userdatalist = new User { userdata = userlist };
-            return View(userdatalist);
+            //SearchUser userlist = new SearchUser();
+            ////List<SearchUser> list = new List<SearchUser>();
+            //userlist.userdata = userdata.GetAllUser();
+            //return View(userlist);
+            return View();
         }
 
         [HttpPost]
-        public ActionResult SearchUser(string search)
+        public ActionResult Search(SearchUser search, int? Id, int? page)
         {
-            List<User> userlist = new List<User>();
-            userlist = userdata.GetAllUser();
-            var userdatalist = new User { userdata = userlist };
-            return View(userdatalist);
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            ViewBag.PageNumber = pageNumber;
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            else
+            {
+                SearchUser userlist = new SearchUser();
+                userlist.userdata = userdata.GetSearchResult(search.searchvalue);
+
+                if (userlist.userdata != null && userlist.userdata.Count > 0)
+                {
+                    return View(userlist);
+                }
+
+
+                return View();
+
+
+            }
         }
 
 

@@ -49,31 +49,27 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
-                  
+
                 </ul>
 
                 <div class="btn-group pull-right">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
-                                <span class="glyphicon glyphicon-log-out"></span>
-                                @Session["Fname"] @Session["Lname"]
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="../User/AddUser" class="elements">Create</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
+                            @if (string.IsNullOrEmpty(Session["Fname"] as string) && string.IsNullOrEmpty(Session["Lname"] as string))
+                            {
+                                <a href="../Account/Login"><span class="glyphicon glyphicon-log-in"></span>Login</a>
+                            }
+                            else
+                            {<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                    <span class="glyphicon glyphicon-log-out"></span>  @Session["Fname"] @Session["Lname"]
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../Account/UserProfile"><span class="glyphicon glyphicon-info-sign"></span> Profile </a></li>
+                                    <li><a href="../Account/ChangePassword"><span class="glyphicon glyphicon-lock"></span> Change Password </a></li>
+                                    <li><a href="../Account/Login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
+                                </ul>
+                            }
                         </li>
-                        <li><a href="../UserLogin/Login"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-
-                 
-
-
                     </ul>
                 </div>
             </div><!--/.nav-collapse -->

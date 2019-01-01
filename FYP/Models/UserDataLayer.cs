@@ -149,9 +149,9 @@ namespace FYP.Models
         }
 
 
-        public List<User> GetAllUser()
+        public List<SearchUser> GetAllUser()
         {
-            List<User> userlist = new List<User>();
+            List<SearchUser> userlist = new List<SearchUser>();
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -159,12 +159,11 @@ namespace FYP.Models
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 con.Open();
-                User model = new User();
                 SqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    User userdetail = new User();
+                    SearchUser userdetail = new SearchUser();
                     userdetail.UserID = rdr["UserID"].ToString();
                     userdetail.Email = rdr["Email"].ToString();
                     userdetail.ICPassport = rdr["IC_Passport"].ToString();
@@ -174,6 +173,40 @@ namespace FYP.Models
                     userdetail.UserStatusListValue = rdr["StatusDescription"].ToString();
                     userdetail.UserRoleListValue = rdr["RoleDescription"].ToString();
                     userlist.Add(userdetail);
+                    userdetail.userdata = userlist;
+                }
+
+                con.Close();
+            }
+            return userlist;
+        }
+
+        public List<SearchUser> GetSearchResult(string search)
+        {
+            List<SearchUser> userlist = new List<SearchUser>();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spGetAllUsers", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Search", search);
+                con.Open();
+                User model = new User();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    SearchUser userdetail = new SearchUser();
+                    userdetail.UserID = rdr["UserID"].ToString();
+                    userdetail.Email = rdr["Email"].ToString();
+                    userdetail.ICPassport = rdr["IC_Passport"].ToString();
+                    userdetail.PhoneNumber = rdr["Phone_no"].ToString();
+                    userdetail.FName = rdr["FirstName"].ToString();
+                    userdetail.LName = rdr["LastName"].ToString();
+                    userdetail.UserStatusListValue = rdr["StatusDescription"].ToString();
+                    userdetail.UserRoleListValue = rdr["RoleDescription"].ToString();
+                    userlist.Add(userdetail);
+                    userdetail.userdata = userlist;
                 }
 
                 con.Close();
@@ -182,11 +215,10 @@ namespace FYP.Models
         }
 
 
-     
 
-       
 
-      
+
+
 
 
     }

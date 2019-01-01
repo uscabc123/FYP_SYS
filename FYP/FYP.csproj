@@ -68,6 +68,12 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -168,7 +174,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AnnouncementController.cs" />
+    <Compile Include="Controllers\AnnounceController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -180,6 +186,8 @@
     <Compile Include="Models\AnnouncementDataLayer.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\SearchAnnouncement.cs" />
+    <Compile Include="Models\SearchUser.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserDataLayer.cs" />
     <Compile Include="Models\UserProfile.cs" />
@@ -193,6 +201,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -308,12 +317,13 @@
     <Content Include="Views\Shared\_LayoutNurse.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Appointment\Create.cshtml" />
-    <Content Include="Views\Announcement\Create.cshtml" />
     <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Shared\_LayoutPatient.cshtml" />
     <Content Include="Views\User\EditUser.cshtml" />
-    <Content Include="Views\Announcement\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Announce\Create.cshtml" />
+    <Content Include="Views\User\Search.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -336,9 +346,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\User\AddUser.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserLogin\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\User\SearchUser.cshtml" />

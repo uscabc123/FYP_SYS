@@ -26,12 +26,12 @@ namespace FYP.Controllers
                 int message = userdata.login(login);
                 if (message == 1)
                 {
-                    TempData["Error"] = "Invalid login detail";
+                    TempData["Error"] = "Incorrect Password or Username.";
                     return RedirectToAction("Login");
                 }
                 else if (message == 2)
                 {
-                    TempData["Error"] = "Your account currently inactive. Please contact with administration for more information";
+                    TempData["Error"] = "Your account currently inactive. Please contact with administration for more information.";
                     return RedirectToAction("Login");
                 }
                 else
@@ -162,7 +162,19 @@ namespace FYP.Controllers
 
             }
         }
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
 
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(string email)
+        {
+
+            return View();
+        }
         [HttpGet]
         public ActionResult ForgetPassword()
         {
@@ -194,7 +206,7 @@ namespace FYP.Controllers
             Response.AddHeader("Expires", "0");
             Response.AppendToLog("window.location.reload();");
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Login", "Account");
         }
 
     }

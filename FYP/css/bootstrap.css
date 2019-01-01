@@ -8,12 +8,16 @@
 */
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    position: relative;
+    min-height: 100%;
 }
 body {
-  margin: 0;
+    height: 100%;
+    margin-bottom: 260px;
+    margin: 0;
 }
 article,
 aside,
@@ -279,6 +283,7 @@ body {
     color: #2c3e50;
     background-color: #ffffff;
     padding-top: 30px;
+    margin-bottom: 160px;
 }
 input,
 button,
@@ -735,10 +740,12 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 60px;
+    margin-bottom: 160px;
 }
 @media (min-width: 768px) {
   .container {

@@ -1,8 +1,7 @@
-﻿
-@model FYP.Models.Announcement
+﻿@model FYP.Models.Announcement
 
 
-@using (Html.BeginForm("Create", "Announcement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Announce", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <form>
@@ -45,7 +44,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Status)
                 @Html.DropDownListFor(m => m.Status, ViewBag.ComboStatus as SelectList, "---Please Select Announcement Status---", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Status, null,new { @class = "text-danger" })
+                @Html.ValidationMessageFor(m => m.Status, null, new { @class = "text-danger" })
             </div>
 
 
@@ -58,3 +57,5 @@
         </div>
     </form>
 }
+
+
