@@ -177,6 +177,7 @@
     <Compile Include="Controllers\AnnounceController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageBoardController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -186,6 +187,8 @@
     <Compile Include="Models\AnnouncementDataLayer.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Messenge.cs" />
+    <Compile Include="Models\Messenge_Reply.cs" />
     <Compile Include="Models\SearchAnnouncement.cs" />
     <Compile Include="Models\SearchUser.cs" />
     <Compile Include="Models\User.cs" />
@@ -324,6 +327,7 @@
     <Content Include="Views\Announce\Create.cshtml" />
     <Content Include="Views\User\Search.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\MessageBoard\MessageBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
