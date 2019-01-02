@@ -77,11 +77,9 @@ namespace FYP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(SearchUser search, int? Id, int? page)
+        public ActionResult Search(SearchUser search)
         {
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            ViewBag.PageNumber = pageNumber;
+          
 
             if (!ModelState.IsValid)
             {
@@ -96,8 +94,6 @@ namespace FYP.Controllers
                 {
                     return View(userlist);
                 }
-
-
                 return View();
 
 

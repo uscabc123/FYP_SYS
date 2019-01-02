@@ -1,0 +1,143 @@
+﻿@model FYP.Models.Consultation
+
+
+
+<div class="container">
+    <div class="page-header">
+        <fieldset>
+            <h1>Add Consultation Record</h1>
+        </fieldset>
+    </div>
+
+
+    <span class="input-group-addon">Patient Information</span>
+    <br />
+    @if (TempData["Empty"] != null)
+    {
+        <div class="btn-group pull-left">
+            <a href="../User/Search" class="btn btn-success">Search Patient</a>
+        </div>
+    }
+    else
+    {
+        <div class="form-group text-center">
+            <label class="control-label text-left" style="width:100px;">
+                User ID :
+            </label>
+            <label class="control-label text-left" style="width:170px;">
+                @ViewData["UserID"]
+            </label>
+
+            <label class="control-label text-left" style="width:170px;">
+                Full Name :
+            </label>
+            <label class="control-label text-left" style="width:200px;">
+                @ViewData["FName"] @ViewData["LName"]
+            </label>
+        </div>
+
+
+
+        <div class="form-group text-center">
+            <label class="control-label text-left" style="width:100px;">
+                Gender :
+            </label>
+            @if (ViewData["UserGender"] != null)
+            {
+                if (ViewData["UserGender"].ToString() == "0")
+                {
+                    <label class="control-label text-left" style="width:170px;">
+                        Male
+                    </label>
+                }
+                else
+                {
+                    <label class="control-label text-left" style="width:170px;">
+                        Female
+                    </label>
+                }
+            }
+
+
+            <label class="control-label text-left" style="width:170px;">
+                IC/Passport No. :
+            </label>
+            <label class="control-label text-left" style="width:200px;">
+                @ViewData["ICPassport"]
+            </label>
+        </div>
+
+        <div class="form-group text-center">
+            <label class="control-label text-left" style="width:100px;">
+                Email :
+            </label>
+            <label class="control-label text-left" style="width:170px;">
+                @ViewData["Email"]
+            </label>
+
+            <label class="control-label text-left" style="width:170px;">
+                Contact Number :
+            </label>
+            <label class="control-label text-left" style="width:200px;">
+                @ViewData["PhoneNumber"]
+            </label>
+        </div>
+
+
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true)
+
+            if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    <p><strong>Error:</strong> @TempData["Error"].ToString()</p>
+                </div>
+            }
+            if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">
+                    <p><strong>Success:</strong> @TempData["Success"].ToString()</p>
+                </div>
+            }
+
+            <div class="input-group">
+                <span class="input-group-addon">Consultation Record</span>
+            </div>
+            <br />
+            <div class="form-group">
+
+                <label class="control-label">
+                    Diagnose
+                </label>
+                @Html.TextBoxFor(model => model.diagnose, new { @class = "form-control", placeholder = "Diagnose" })
+                @Html.ValidationMessageFor(m => m.diagnose, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+
+                <label class="control-label">
+                    Symptoms
+                </label>
+                @Html.TextBoxFor(model => model.symptoms, new { @class = "form-control", placeholder = "Symptoms" })
+                @Html.ValidationMessageFor(m => m.symptoms, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+
+                <label class="control-label">
+                    Remarks
+                </label>
+                @Html.TextAreaFor(model => model.remarks, new { @class = "form-control", placeholder = "Remarks" })
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-12 text-center">
+                    <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />
+                </div>
+            </div>
+        }
+    }
+
+</div>

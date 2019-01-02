@@ -106,8 +106,6 @@ namespace FYP.Models
                     userdetail.PhoneNumber = rdr["Phone_no"].ToString();
                     userdetail.FName = rdr["FirstName"].ToString();
                     userdetail.LName = rdr["LastName"].ToString();
-                    userdetail.UserStatusID = Convert.ToInt32(rdr["StatusID"]);
-                    userdetail.UserRoleID = Convert.ToInt32(rdr["RoleID"]);
                     userdetail.Gender = Convert.ToInt32(rdr["Gender"]);
                 }
 

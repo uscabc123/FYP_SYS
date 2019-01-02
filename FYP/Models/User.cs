@@ -53,13 +53,13 @@ namespace FYP.Models
 
             public string UserStatusListValue { get; set; }
 
-            //    public string UserPassword { get; set; }
+        //    public string UserPassword { get; set; }
 
-            //public int status { get; set; }
-            //public string searchuser { get; set; }
+        //public int status { get; set; }
+        //public string searchuser { get; set; }
 
-            public List<User> userdata { get; set; }
-            //public List<User> userprofile { get; set; }
+        public List<User> userdata { get; set; }
+        //public List<User> userprofile { get; set; }
 
     }
 }

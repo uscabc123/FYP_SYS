@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnnounceController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\ConsultationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageBoardController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AnnouncementDataLayer.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Consultation.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Messenge.cs" />
     <Compile Include="Models\Messenge_Reply.cs" />
@@ -328,6 +330,7 @@
     <Content Include="Views\User\Search.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\MessageBoard\MessageBoard.cshtml" />
+    <Content Include="Views\Consultation\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -350,9 +353,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\User\AddUser.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\User\SearchUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />

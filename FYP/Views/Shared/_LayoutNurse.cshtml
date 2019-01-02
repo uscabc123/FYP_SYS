@@ -41,7 +41,7 @@
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
                         <ul class="dropdown-menu">
                             <li><a href="../User/AddUser" class="elements">Create</a></li>
-                            <li><a href="#">Another action</a></li>
+                            <li><a href="../User/Search" class="elements">Search</a></li>
                             <li><a href="#">Something else here</a></li>
                             <li class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
@@ -49,8 +49,17 @@
                             <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
+                    <li class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Announcement</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../Announce/Create" class="elements">Add Announcement</a></li>
+                            <li><a href="">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
                     </li>
                 </ul>
 
@@ -83,7 +92,8 @@
     </div>
     }
 
-        @RenderBody()
+    @RenderBody()
+    <hr />
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
             <p class="navbar-text pull-left">

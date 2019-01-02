@@ -10,7 +10,6 @@
                 <fieldset>
                     <h1>Add Announcement</h1>
                 </fieldset>
-
             </div>
             @if (TempData["Error"] != null)
             {
@@ -46,7 +45,6 @@
                 @Html.DropDownListFor(m => m.Status, ViewBag.ComboStatus as SelectList, "---Please Select Announcement Status---", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Status, null, new { @class = "text-danger" })
             </div>
-
 
             <div class="input-group text-center" style="width: 100%">
                 <br />

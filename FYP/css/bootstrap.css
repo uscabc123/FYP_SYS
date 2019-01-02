@@ -283,7 +283,7 @@ body {
     color: #2c3e50;
     background-color: #ffffff;
     padding-top: 30px;
-    margin-bottom: 160px;
+    /*margin-bottom: 160px;*/
 }
 input,
 button,
@@ -569,8 +569,8 @@ a.bg-danger:hover {
   background-color: #d62c1a;
 }
 .page-header {
-  padding-bottom: 9.5px;
-  margin: 42px 0 21px;
+  padding-bottom: 5px;
+  margin: 30px 0 21px;
   border-bottom: 1px solid #ecf0f1;
 }
 ul,
@@ -744,8 +744,6 @@ pre code {
     margin-left: auto;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 60px;
-    margin-bottom: 160px;
 }
 @media (min-width: 768px) {
   .container {
@@ -759,7 +757,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1160px;
   }
 }
 .container-fluid {
@@ -3648,7 +3646,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 60px;
-  margin-bottom: 21px;
+  /*margin-bottom: 21px;*/
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
