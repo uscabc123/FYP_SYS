@@ -15,6 +15,13 @@ namespace FYP.Models
 
         [Required]
         public string diagnose { get; set; }
+        public string doctorid { get; set; }
+
+        public string patientid { get; set; }
+
+        public DateTime ConsultationDate { get; set; }
+
+        public int followup { get; set; }
 
     }
 }

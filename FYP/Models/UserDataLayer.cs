@@ -179,7 +179,7 @@ namespace FYP.Models
             return userlist;
         }
 
-        public List<SearchUser> GetSearchResult(string search)
+        public List<SearchUser> GetSearchResult(SearchUser search)
         {
             List<SearchUser> userlist = new List<SearchUser>();
 
@@ -187,7 +187,8 @@ namespace FYP.Models
             {
                 SqlCommand cmd = new SqlCommand("spGetAllUsers", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Search", search);
+                cmd.Parameters.AddWithValue("@Search", search.searchvalue);
+
                 con.Open();
                 User model = new User();
                 SqlDataReader rdr = cmd.ExecuteReader();

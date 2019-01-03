@@ -90,6 +90,19 @@
 
             @Html.ValidationSummary(true)
 
+
+            var followup = new List<SelectListItem>()
+{
+
+new SelectListItem() {  Value = "0", Text = "No"},
+new SelectListItem() {Value = "1", Text = "Yes"}
+
+};
+            ViewBag.followup = new SelectList(followup, "Value", "Text");
+            <div class="input-group">
+                <span class="input-group-addon">Consultation Record</span>
+            </div>
+            <br />
             if (TempData["Error"] != null)
             {
                 <div class="alert alert-danger">
@@ -102,11 +115,6 @@
                     <p><strong>Success:</strong> @TempData["Success"].ToString()</p>
                 </div>
             }
-
-            <div class="input-group">
-                <span class="input-group-addon">Consultation Record</span>
-            </div>
-            <br />
             <div class="form-group">
 
                 <label class="control-label">
@@ -120,7 +128,7 @@
                 <label class="control-label">
                     Symptoms
                 </label>
-                @Html.TextBoxFor(model => model.symptoms, new { @class = "form-control", placeholder = "Symptoms" })
+                @Html.TextAreaFor(model => model.symptoms, new { @class = "form-control", placeholder = "Symptoms" })
                 @Html.ValidationMessageFor(m => m.symptoms, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
@@ -132,6 +140,20 @@
 
             </div>
 
+
+           
+            <div class="form-group">
+                <label class="control-label">
+                   Follow up after consultation?
+                </label>
+
+                @Html.DropDownListFor(m => m.followup, ViewBag.followup as SelectList, "-----Please select follow up status-----", new { @class = "form-control" })
+
+
+                @Html.ValidationMessageFor(model => model.followup, null, new { @class = "text-danger" })
+
+
+            </div>
             <div class="form-group">
                 <div class="col-12 text-center">
                     <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />

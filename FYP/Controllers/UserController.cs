@@ -88,7 +88,11 @@ namespace FYP.Controllers
             else
             {
                 SearchUser userlist = new SearchUser();
-                userlist.userdata = userdata.GetSearchResult(search.searchvalue);
+                if (!string.IsNullOrEmpty(Session["UserID"] as string))
+                {
+                    search.AccountUserID = Session["UserID"].ToString();
+                }
+                userlist.userdata = userdata.GetSearchResult(search);
 
                 if (userlist.userdata != null && userlist.userdata.Count > 0)
                 {

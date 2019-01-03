@@ -10,7 +10,8 @@ namespace FYP.Models
     public class SearchUser
     {
 
-      
+        public string AccountUserID { get; set; }
+
         public string UserID { get; set; }
 
         public string PhoneNumber { get; set; }

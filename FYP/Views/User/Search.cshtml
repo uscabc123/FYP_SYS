@@ -55,8 +55,10 @@
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
-               
-                    @if (Session["RoleID"].ToString() == "1")
+                @if (Session["RoleID"] != null)
+                {
+
+                    if (Session["RoleID"].ToString() == "1")
                     {
                         <th scope="col">
                             @Html.DisplayNameFor(model => model.UserStatusListValue)
@@ -81,8 +83,9 @@
                     {
                         Response.Redirect("../Account/Login");
                     }
-                
-
+                }
+                <th scope="col">
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -140,8 +143,10 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Email)
                                 </td>
-                                
-                                    @if (Session["RoleID"].ToString() == "1")
+                                @if (Session["RoleID"] != null)
+                                {
+
+                                    if (Session["RoleID"].ToString() == "1")
                                     {
                                         <td>
                                             @Html.DisplayFor(modelItem => item.UserStatusListValue)
@@ -177,7 +182,8 @@
                                     {
                                         Response.Redirect("../Account/Login");
                                     }
-                                
+                                }
+
                                 </tr>
 
                         }
