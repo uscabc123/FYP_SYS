@@ -10,10 +10,8 @@ namespace FYP.Models
     {
         public int Id { get; set; }
         [Required]
-        public string Subject { get; set; }
-        [Required]
         public string MessageContent { get; set; }
-        public string From { get; set; }
-        public DateTime DateTimePosted { get; set; }
+        public string Receiver { get; set; }
+        public DateTime MessageDateTime { get; set; }
     }
 }

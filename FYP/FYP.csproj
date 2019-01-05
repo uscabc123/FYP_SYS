@@ -191,6 +191,7 @@
     <Compile Include="Models\Consultation.cs" />
     <Compile Include="Models\ConsultationDataLayer.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\MessageDataLayer.cs" />
     <Compile Include="Models\Messenge.cs" />
     <Compile Include="Models\Messenge_Reply.cs" />
     <Compile Include="Models\SearchAnnouncement.cs" />
@@ -334,6 +335,8 @@
     <Content Include="Views\MessageBoard\MessageBoard.cshtml" />
     <Content Include="Views\Consultation\Create.cshtml" />
     <Content Include="Views\Consultation\SearchConsultation.cshtml" />
+    <Content Include="Views\Consultation\EditConsultation.cshtml" />
+    <Content Include="Views\MessageBoard\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

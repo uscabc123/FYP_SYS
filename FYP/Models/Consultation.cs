@@ -22,6 +22,6 @@ namespace FYP.Models
         public DateTime ConsultationDate { get; set; }
 
         public int followup { get; set; }
-
+        
     }
 }

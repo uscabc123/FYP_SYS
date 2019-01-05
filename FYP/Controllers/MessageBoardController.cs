@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FYP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,15 +18,18 @@ namespace FYP.Controllers
         //}
 
 
-
-        public ActionResult MessageBoard()
-            {
+         [HttpGet]
+        public ActionResult MessageBoard(string cid)
+        {
                 return View();
 
-            }
-    public ActionResult SendMessage()
-    {
-        return View();
-    }
-    }
+        }
+
+        [HttpPost]
+        public ActionResult MessageBoard(Messenge message)
+        {
+            message.MessageContent;
+            return View();
+        }
+        }
 }

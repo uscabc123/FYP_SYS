@@ -79,7 +79,7 @@ namespace FYP.Controllers
         [HttpPost]
         public ActionResult Search(SearchUser search)
         {
-          
+
 
             if (!ModelState.IsValid)
             {
@@ -91,15 +91,15 @@ namespace FYP.Controllers
                 if (!string.IsNullOrEmpty(Session["UserID"] as string))
                 {
                     search.AccountUserID = Session["UserID"].ToString();
-                }
-                userlist.userdata = userdata.GetSearchResult(search);
 
-                if (userlist.userdata != null && userlist.userdata.Count > 0)
-                {
-                    return View(userlist);
+                    userlist.userdata = userdata.GetSearchResult(search);
+
+                    if (userlist.userdata != null && userlist.userdata.Count > 0)
+                    {
+                        return View(userlist);
+                    }
                 }
                 return View();
-
 
             }
         }

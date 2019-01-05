@@ -90,7 +90,6 @@ namespace FYP.Controllers
 
                 if (!ModelState.IsValid)
                 {
-
                     ViewData["FName"] = user.FName;
                     ViewData["LName"] = user.LName;
                     ViewData["PhoneNumber"] = user.PhoneNumber;

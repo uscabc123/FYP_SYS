@@ -188,6 +188,7 @@ namespace FYP.Models
                 SqlCommand cmd = new SqlCommand("spGetAllUsers", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Search", search.searchvalue);
+                cmd.Parameters.AddWithValue("@UserSearch", search.AccountUserID);
 
                 con.Open();
                 User model = new User();

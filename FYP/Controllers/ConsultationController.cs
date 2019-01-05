@@ -10,7 +10,7 @@ namespace FYP.Controllers
     public class ConsultationController : Controller
     {
         UserDataLayer userdata = new UserDataLayer();
-
+        ConsultationDataLayer consultdata = new ConsultationDataLayer();
         // GET: Consultation
         [HttpGet]
         public ActionResult Create(string uid)
@@ -18,7 +18,15 @@ namespace FYP.Controllers
             Consultation profile = new Consultation();
             if (uid == null)
             {
-                TempData["Empty"] = "Empty";
+                //ConsultationSearch search = new ConsultationSearch();
+                //profile.User = userdata.EditUser(search.patientid);
+                //ViewData["FName"] = profile.User.FName;
+                //ViewData["LName"] = profile.User.LName;
+                //ViewData["PhoneNumber"] = profile.User.PhoneNumber;
+                //ViewData["UserID"] = profile.User.UserID;
+                //ViewData["Email"] = profile.User.Email;
+                //ViewData["ICPassport"] = profile.User.ICPassport;
+                //ViewData["UserGender"] = profile.User.Gender; 
                 return View();
 
             }
@@ -74,22 +82,68 @@ namespace FYP.Controllers
                     ViewData["ICPassport"] = profile.User.ICPassport;
                     ViewData["UserGender"] = profile.User.Gender;
                 }
-
-
-
             }
             return View();
         }
-
         [HttpGet]
         public ActionResult SearchConsultation()
         {
+            //ConsultationSearch consultlist = new ConsultationSearch();
+            //if (!string.IsNullOrEmpty(Session["UserID"] as string))
+            //{
+            //    consultation.userid = Session["UserID"].ToString();
+            //    consultation.UserRole = Session["RoleID"].ToString();
+            //    consultation.searchvalue = null;
+            //    consultlist.consultsdata = consultdata.SearchConsultation(consultation);
+            //} return View(consultlist);
+            return View();
+
+        }       
+        [HttpPost]
+        public ActionResult SearchConsultation(ConsultationSearch consultation, string cid)
+        {
+            ConsultationSearch consultlist = new ConsultationSearch();
+
+            if (!string.IsNullOrEmpty(Session["UserID"] as string))
+            {
+                ConsultationSearch consult = new ConsultationSearch();
+                consultation.userid = Session["UserID"].ToString();
+                consultation.UserRole = Session["RoleID"].ToString();
+                consultlist.consultsdata =  consultdata.SearchConsultation(consultation);
+                if (consultlist.consultsdata != null && consultlist.consultsdata.Count > 0)
+                {
+                    return View(consultlist);
+                }
+            }
             return View();
         }
-        [HttpPost]
-        public ActionResult SearchConsultation(string uid)
+        [HttpGet]
+        public ActionResult EditConsultation()
         {
+            //ConsultationSearch consultlist = new ConsultationSearch();
+            //if (!string.IsNullOrEmpty(Session["UserID"] as string))
+            //{
+            //    consultation.userid = Session["UserID"].ToString();
+            //    consultation.UserRole = Session["RoleID"].ToString();
+            //    consultation.searchvalue = null;
+            //    consultlist.consultsdata = consultdata.SearchConsultation(consultation);
+            //} return View(consultlist);
             return View();
+
+        }
+        [HttpPost]
+        public ActionResult EditConsultation(string cid)
+        {
+            //ConsultationSearch consultlist = new ConsultationSearch();
+            //if (!string.IsNullOrEmpty(Session["UserID"] as string))
+            //{
+            //    consultation.userid = Session["UserID"].ToString();
+            //    consultation.UserRole = Session["RoleID"].ToString();
+            //    consultation.searchvalue = null;
+            //    consultlist.consultsdata = consultdata.SearchConsultation(consultation);
+            //} return View(consultlist);
+            return View();
+
         }
     }
 }
