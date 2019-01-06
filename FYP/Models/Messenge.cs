@@ -8,10 +8,11 @@ namespace FYP.Models
 {
     public class Messenge
     {
-        public int Id { get; set; }
-        [Required]
+        public int MessageID { get; set; }
         public string MessageContent { get; set; }
         public string Receiver { get; set; }
+        public string Sender { get; set; }
         public DateTime MessageDateTime { get; set; }
+        public List<Messenge> messageData { get; set; }
     }
 }

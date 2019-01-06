@@ -13,10 +13,8 @@ namespace FYP.Models
     {
         string connectionString = ConfigurationManager.ConnectionStrings["FYPDB"].ToString();
 
-
         public List<User> GetAccountStatusData()
         {
-
             List<User> ComboAccValue = new List<User>();
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -108,7 +106,6 @@ namespace FYP.Models
                     userdetail.LName = rdr["LastName"].ToString();
                     userdetail.Gender = Convert.ToInt32(rdr["Gender"]);
                 }
-
                 con.Close();
                 return userdetail;
             }
@@ -118,7 +115,6 @@ namespace FYP.Models
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-
                 SqlCommand cmd = new SqlCommand("spUpdateUserDetail", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -131,21 +127,15 @@ namespace FYP.Models
                 cmd.Parameters.AddWithValue("@Gender", user.Gender);
                 cmd.Parameters.AddWithValue("@User_Role", user.UserRoleID);
                 cmd.Parameters.AddWithValue("@AccountStatus", user.UserStatusID);
-
                 con.Open();
-
                 SqlParameter returnParameter = cmd.Parameters.Add("@UpdateProfileresult", SqlDbType.Int);
                 returnParameter.Direction = ParameterDirection.ReturnValue;
                 cmd.ExecuteNonQuery();
-
                 int id = (int)returnParameter.Value;
-
                 con.Close();
                 return id;
-
             }
         }
-
 
         public List<SearchUser> GetAllUser()
         {
@@ -208,7 +198,6 @@ namespace FYP.Models
                     userlist.Add(userdetail);
                     userdetail.userdata = userlist;
                 }
-
                 con.Close();
             }
             return userlist;

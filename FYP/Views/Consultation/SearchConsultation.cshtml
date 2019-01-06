@@ -115,8 +115,8 @@
                                 {
 
                             <td>
-                                <span class="glyphicon glyphicon-pencil"> </span>@Html.ActionLink("Edit Consultation Record", "EditConsultation", "Consultation", new { cid = Model.consultID }, null) |
-                                <span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Contact Patient", "MessageBoard", "MessageBoard", new { cid = Model.patientid }, null)
+                                <span class="glyphicon glyphicon-pencil"> </span>@Html.ActionLink("Edit Consultation Record", "EditConsultation", "Consultation", new { cid = item.consultID }, null) |
+                                <span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Contact Patient", "MessageBoard", "MessageBoard", new { cid = item.patientid }, null)
 
                             </td>
                                 }
@@ -124,8 +124,8 @@
                                 else if (Session["RoleID"].ToString() == "3")
                                 {
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil"> </span>@Html.ActionLink("View Consultation Record", "EditUser", "User", new { cid = Model.consultID }, null) |
-                                        <span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Contact Patient", "MessageBoard", "MessageBoard", new { cid = Model.patientid }, null)
+                                        <span class="glyphicon glyphicon-pencil"> </span>@Html.ActionLink("View Consultation Record", "EditUser", "User", new { cid = item.consultID }, null) |
+                                        <span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Contact Patient", "MessageBoard", "MessageBoard", new { cid = item.patientid }, null)
                                     </td>
 
                                 }

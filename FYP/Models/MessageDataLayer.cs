@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 
 namespace FYP.Models
 {
@@ -12,24 +13,52 @@ namespace FYP.Models
     {
         string connectionString = ConfigurationManager.ConnectionStrings["FYPDB"].ToString();
 
-        public void AddConsultation(Consultation consultation)
+        public void AddMessage(Messenge messageboard)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("spAddConsultation", con);
+                SqlCommand cmd = new SqlCommand("spAddMessage", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@doctorid", consultation.doctorid);
-                cmd.Parameters.AddWithValue("@Diagnose", consultation.diagnose);
-                cmd.Parameters.AddWithValue("@Symptoms", consultation.symptoms);
-                cmd.Parameters.AddWithValue("@Remarks", consultation.remarks);
-                cmd.Parameters.AddWithValue("@patientid", consultation.patientid);
-                cmd.Parameters.AddWithValue("@ConsultationStatus", consultation.followup);
+                cmd.Parameters.AddWithValue("@SenderID", messageboard.Sender);
+                cmd.Parameters.AddWithValue("@ReceiverID", messageboard.Receiver);
+                cmd.Parameters.AddWithValue("@MContent", messageboard.MessageContent);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
+        }
+
+        public List<Messenge> GetMessage(Messenge messageboard)
+        {
+            List<Messenge> mlist = new List<Messenge>();
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spAddMessage", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@SenderID", messageboard.Sender);
+                cmd.Parameters.AddWithValue("@ReceiverID", messageboard.Receiver);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Messenge messengedetail = new Messenge();
+                    messengedetail.MessageID = Convert.ToInt32(rdr["remark"]);
+                    messengedetail.MessageContent = rdr["MessageContent"].ToString();
+                    messengedetail.MessageDateTime = (DateTime)rdr["messagedatetime"];
+                    messengedetail.Sender = rdr["Sender"].ToString();
+                    messengedetail.Receiver = rdr["Receiver"].ToString();
+                    mlist.Add(messengedetail);
+                    messengedetail.messageData = mlist;
+                }
+                con.Close();
+            }
+            return mlist;
         }
     }
 }

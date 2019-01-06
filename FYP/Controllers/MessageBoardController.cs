@@ -9,27 +9,39 @@ namespace FYP.Controllers
 {
     public class MessageBoardController : Controller
     {
-        // GET: MessageBoard
-        //public ActionResult Index()
-        //{
+        MessageDataLayer messagedatalayer = new MessageDataLayer();
 
-        //    return View();
-
-        //}
-
-
-         [HttpGet]
+        [HttpGet]
         public ActionResult MessageBoard(string cid)
         {
-                return View();
+            Messenge message = new Messenge();
 
+            if (string.IsNullOrEmpty(Session["UserID"] as string))
+            {
+                message.Receiver = cid;
+            }
+            else
+            {
+                message.Sender = Session["UserID"].ToString();
+                message.Receiver = cid;
+                message.messageData = messagedatalayer.GetMessage(message);
+                if (message.messageData != null && message.messageData.Count > 0)
+                {
+                    return View(message);
+                }
+            }
+
+            return View();
         }
 
         [HttpPost]
         public ActionResult MessageBoard(Messenge message)
         {
-            message.MessageContent;
+            if(message.MessageContent != null)
+            {
+                return Redirect(Request.UrlReferrer.ToString());
+            }
             return View();
         }
-        }
+    }
 }
