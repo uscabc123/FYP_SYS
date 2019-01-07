@@ -194,6 +194,7 @@
     <Compile Include="Models\MessageDataLayer.cs" />
     <Compile Include="Models\Messenge.cs" />
     <Compile Include="Models\Messenge_Reply.cs" />
+    <Compile Include="Models\Password.cs" />
     <Compile Include="Models\SearchAnnouncement.cs" />
     <Compile Include="Models\SearchUser.cs" />
     <Compile Include="Models\User.cs" />

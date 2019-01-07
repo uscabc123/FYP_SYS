@@ -5,6 +5,7 @@
     .incoming_msg_img {
         display: inline-block;
         width: 6%;
+        top: -100%;
     }
 
     .received_msg {
@@ -17,7 +18,7 @@
     .type_msg {
         /*border-top: 1px solid #c4c4c4;*/
         position: relative;
-        padding: 25px 10px 5px 12px;
+        padding: 25px 5px 5px 10px;
     }
 
     .msg_send_btn {
@@ -34,6 +35,11 @@
         width: 33px;
     }
 
+    .scrollbar {
+        height: 180px;
+        overflow-y: scroll;
+    }
+
     .received_withd_msg p {
         background: #ebebeb none repeat scroll 0 0;
         border-radius: 3px;
@@ -47,6 +53,7 @@
     .outgoing_msg {
         overflow: hidden;
         margin: 26px 0 26px;
+        top: -100%;
     }
 
     .sent_msg p {
@@ -70,13 +77,15 @@
         font-size: 12px;
         margin: 8px 0 0;
     }
-</style>
-<div class="container">
-    <div class="page-header">
-        <fieldset>
-            <h1>Messenger</h1>
-        </fieldset>
-    </div>
+</style> 
+
+<div class="container page-header">
+    <fieldset>
+        <h1>Messenger</h1>
+    </fieldset>
+</div>
+<div class="container scrollbar" id="chat-scroll" >
+
     @if (Model == null)
     {
 
@@ -85,78 +94,84 @@
     {
         foreach (var item in Model.messageData)
         {
-            if (item.MessageID.ToString() == "0")
+            if (item.Sender.ToString() == Session["UserID"].ToString())
             {
-                <div class="outgoing_msg">
-                    <div class="sent_msg">
-                        <p>
-                            @item.MessageContent
-                        </p>
-                        <span class="time_date"> @item.MessageDateTime</span>
+                if (item.MessageID.ToString() == "0")
+                {
+                    <div class="outgoing_msg" >
+                        <div class="sent_msg">
+                            <p>
+                                @item.MessageContent
+                            </p>
+                            <span class="time_date"> @item.MessageDateTime</span>
+                        </div>
                     </div>
-                </div>
+                }
+                else if (item.MessageID.ToString() == "1")
+                {
+                    <div class="incoming_msg">
+                        <div class="received_msg">
+                            <div class="received_withd_msg">
+                                <p>
+                                    @item.MessageContent
+                                </p>
+                                <span class="time_date"> @item.MessageDateTime</span>
+                            </div>
+                        </div>
+                    </div>
+                }
             }
-            else if (item.MessageID.ToString() == "1")
-            { 
-            <div class="incoming_msg">
-                <div class="received_msg">
-                    <div class="received_withd_msg">
-                        <p>
-                            @item.MessageContent
-                        </p>
-                        <span class="time_date"> @item.MessageDateTime</span>
+            else if (item.Receiver.ToString() == Session["UserID"].ToString())
+            {
+                if (item.MessageID.ToString() == "1")
+                {
+                    <div class="outgoing_msg">
+                        <div class="sent_msg">
+                            <p>
+                                @item.MessageContent
+                            </p>
+                            <span class="time_date"> @item.MessageDateTime</span>
+                        </div>
                     </div>
-                </div>
-            </div>
+                }
+                else if (item.MessageID.ToString() == "0")
+                {
+                    <div class="incoming_msg">
+                        <div class="received_msg">
+                            <div class="received_withd_msg">
+                                <p>
+                                    @item.MessageContent
+                                </p>
+                                <span class="time_date"> @item.MessageDateTime</span>
+                            </div>
+                        </div>
+                    </div>
+                }
             }
         }
     }
-    @*<div class="outgoing_msg">
-            <div class="sent_msg">
-                <p>
-                    Test which is a new approach to have all
-                    solutions
-                </p>
-                <span class="time_date"> 11:01 AM    |    June 9</span>
-            </div>
-        </div>
-        <div class="incoming_msg">
 
-            <div class="received_msg">
-                <div class="received_withd_msg">
-                    <p>Test, which is a new approach to have</p>
-                    <span class="time_date"> 11:01 AM    |    Yesterday</span>
-                </div>
-            </div>
-        </div>
-        <div class="outgoing_msg">
-            <div class="sent_msg">
-                <p>Apollo University, Delhi, India Test</p>
-                <span class="time_date"> 11:01 AM    |    Today</span>
-            </div>
-        </div>*@
-    @*<div class="incoming_msg">
 
-            <div class="received_msg">
-                <div class="received_withd_msg">
-                    <p>
-                        We work directly with our designers and suppliers,
-                        and sell direct to you, which means quality, exclusive
-                        products, at a price anyone can afford.
-                    </p>
-                    <span class="time_date"> 11:01 AM    |    Today</span>
-                </div>
-            </div>
-        </div>*@
-    <div class="type_msg">
-        @Html.TextBoxFor(model => model.MessageContent, new { @class = "form-control", placeholder = "Type a message" })
-
-        @*<input type="text" class="form-control" placeholder="Type a message" />*@
-        <br />
-        @*</div>
-            <div class="form-group">*@
-        <div class="col-11 text-right">
-            <input type="submit" value="Send" class="btn btn-success" Style="width: 120px" />
-        </div>
-    </div>
 </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+
+
+        @Html.ValidationSummary(true)
+
+        <div class="type_msg">
+            @Html.TextAreaFor(model => model.MessageContent, new { @class = "form-control", placeholder = "Type a message", @Value = Model.MessageContent })
+            <br />
+            <div class="col-11 text-right">
+                <input type="submit" value="Send" class="btn btn-success" Style="width: 120px" id="MessageContainButton" />
+            </div>
+        </div>
+        <br />
+    </div>
+
+
+}

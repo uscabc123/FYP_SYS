@@ -7,7 +7,7 @@
     <div class="container">
         <div class="page-header">
             <fieldset>
-                <h1>User Detail</h1>
+                <h1>Search Consultation</h1>
             </fieldset>
 
         </div>
@@ -51,8 +51,6 @@
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.diagnose)
                 </th>
-
-
                 <th scope="col">
                 </th>
             </tr>
@@ -105,19 +103,14 @@
                                 @Html.DisplayFor(modelItem => item.diagnose)
                             </td>
 
-
-
-
                             @if (Session["RoleID"] != null)
                             {
-
                                 if (Session["RoleID"].ToString() == "2")
                                 {
 
-                            <td>
+                            <td class="text-right">
                                 <span class="glyphicon glyphicon-pencil"> </span>@Html.ActionLink("Edit Consultation Record", "EditConsultation", "Consultation", new { cid = item.consultID }, null) |
                                 <span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Contact Patient", "MessageBoard", "MessageBoard", new { cid = item.patientid }, null)
-
                             </td>
                                 }
 
@@ -127,21 +120,12 @@
                                         <span class="glyphicon glyphicon-pencil"> </span>@Html.ActionLink("View Consultation Record", "EditUser", "User", new { cid = item.consultID }, null) |
                                         <span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Contact Patient", "MessageBoard", "MessageBoard", new { cid = item.patientid }, null)
                                     </td>
-
                                 }
-                             
                             }
-
                         </tr>
-
+                        }
                     }
-
-
                 }
-
-
-
-            }
         </tbody>
     </table>
 </div>

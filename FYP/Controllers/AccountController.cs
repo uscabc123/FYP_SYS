@@ -18,6 +18,24 @@ namespace FYP.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session["RoleID"] = null;
+            Session["StatusID"] = null;
+            Session["Fname"] = null;
+            Session["Lname"] = null;
+            Session["Email"] = null;
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            Response.AddHeader("Cache-control", "no-store, must-revalidate, private, no-cache");
+            Response.AddHeader("Pragma", "no-cache");
+            Response.AddHeader("Expires", "0");
+            Response.AppendToLog("window.location.reload();");
+
+            return RedirectToAction("Login", "Account");
+        }
         [HttpPost]
         public ActionResult Login(Login login)
         {
@@ -164,20 +182,85 @@ namespace FYP.Controllers
         [HttpGet]
         public ActionResult ChangePassword()
         {
-
             return View();
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(string email)
+        public ActionResult ChangePassword(Password password)
         {
+            if (string.IsNullOrEmpty(Session["Email"] as string))
+            {
+                return RedirectToAction("Login");
+            }
+            else if (string.IsNullOrEmpty(Session["UserID"] as string))
+            {
+                return RedirectToAction("Login");
+            }
+            else if (!string.IsNullOrEmpty(Session["UserID"] as string))
+            {
+               if (!string.IsNullOrEmpty(Session["Email"] as string))
+                {
+                     password.Email = Session["Email"].ToString();
+                     password.UserID = Session["UserID"].ToString();
 
+                    var currentpassword = password.CurrentPassword;
+                    var newpassword = password.NewPassword;
+                    var confirmpassword = password.ConfirmPassword;
+
+                    int message = userdata.CheckPassword(password);
+                    if (message == 1)
+                    {
+                        TempData["Error"] = "Incorrect Current Password.";
+                        return RedirectToAction("ChangePassword");
+                    }
+                    else if (message == 2)
+                    {
+                        if (newpassword == confirmpassword)
+                        {
+                            int password_status = userdata.ChangePassword(password);
+                            if (password_status == 3)
+                            {
+                                TempData["Success"] = "Password Changed Successfully.";
+                                return RedirectToAction("ChangePassword");
+                            }
+                            else if (password_status == 1)
+                            {
+                                return RedirectToAction("Login");
+                            }
+                        }
+                        else if (newpassword != confirmpassword)
+                        {
+                            TempData["Error"] = "New Password and Current Password doesn't match.";
+                            return RedirectToAction("ChangePassword");
+                        }
+                    }
+                    else if (message == 3)
+                    {
+                        return RedirectToAction("Login");
+                    }
+                }
+               else
+                {
+                    return RedirectToAction("Login");
+                }
+            }
             return View();
+
         }
         [HttpGet]
-        public ActionResult ForgetPassword()
+        public ActionResult ForgetPassword(Password password)
         {
-
+            int password_status = userdata.Find_Account(password);
+            if (password_status == 1)
+            {
+                TempData["Error"] = "Email doesn't exists.";
+                return RedirectToAction("ForgetPassword");
+            }
+            else if (password_status == 2)
+            {
+                TempData["Success"] = "Email has been sent to your provided email.";
+                return RedirectToAction("ForgetPassword");
+            }
             return View();
         }
 
@@ -188,25 +271,6 @@ namespace FYP.Controllers
             return View();
         }
 
-        [HttpGet]
-
-        public ActionResult Logout()
-        {
-            Session["RoleID"] = null;
-            Session["StatusID"] = null;
-            Session["Fname"] = null;
-            Session["Lname"] = null;
-            Session["Email"] = null;
-            Session.Clear();
-            Session.RemoveAll();
-            Session.Abandon();
-            Response.AddHeader("Cache-control", "no-store, must-revalidate, private, no-cache");
-            Response.AddHeader("Pragma", "no-cache");
-            Response.AddHeader("Expires", "0");
-            Response.AppendToLog("window.location.reload();");
-
-            return RedirectToAction("Login", "Account");
-        }
 
     }
 }

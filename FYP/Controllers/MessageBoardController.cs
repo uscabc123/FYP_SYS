@@ -18,7 +18,7 @@ namespace FYP.Controllers
 
             if (string.IsNullOrEmpty(Session["UserID"] as string))
             {
-                message.Receiver = cid;
+                return RedirectToAction("Login", "Account");
             }
             else
             {
@@ -27,6 +27,14 @@ namespace FYP.Controllers
                 message.messageData = messagedatalayer.GetMessage(message);
                 if (message.messageData != null && message.messageData.Count > 0)
                 {
+                    message.MessageContent = "";
+                    ModelState.Remove("MessageContent");
+                    return View(message);
+                }
+                else
+                {
+                    message.MessageContent = " ";
+                    ModelState.Remove("MessageContent");
                     return View(message);
                 }
             }
@@ -35,13 +43,25 @@ namespace FYP.Controllers
         }
 
         [HttpPost]
-        public ActionResult MessageBoard(Messenge message)
+        public ActionResult MessageBoard(Messenge message, string cid)
         {
-            if(message.MessageContent != null)
+
+            if (string.IsNullOrEmpty(Session["UserID"] as string))
             {
-                return Redirect(Request.UrlReferrer.ToString());
+                return RedirectToAction("Login", "Account");
             }
-            return View();
+            else
+            {
+                message.Sender = Session["UserID"].ToString();
+                message.Receiver = cid;
+                message.messageData = messagedatalayer.AddMessage(message);
+                if (message.messageData != null && message.messageData.Count > 0)
+                {
+                    message.MessageContent = "";
+                    ModelState.Remove("MessageContent");
+                }
+                return View(message);
+            }
         }
     }
 }

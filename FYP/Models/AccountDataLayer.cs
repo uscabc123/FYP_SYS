@@ -118,5 +118,61 @@ namespace FYP.Models
             }
 
         }
+        public int Find_Account(Password password)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spResetPassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Email", password.Email);
+                con.Open();
+                SqlParameter returnParameter = cmd.Parameters.Add("@ChangePasswordStatus", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+                cmd.ExecuteNonQuery();
+                int message = (int)returnParameter.Value;
+                con.Close();
+                return message;
+            }
+        }
+
+        public int CheckPassword(Password password)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spCheckPassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Email", password.Email);
+                cmd.Parameters.AddWithValue("@CurrentPassword", password.CurrentPassword);
+
+                con.Open();
+                SqlParameter returnParameter = cmd.Parameters.Add("@responseMessage", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+                cmd.ExecuteNonQuery();
+                int message = (int)returnParameter.Value;
+                con.Close();
+                return message;
+            }
+        }
+
+        public int ChangePassword(Password password)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spResetPassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Email", password.Email);
+                cmd.Parameters.AddWithValue("@UserID", password.UserID);
+                cmd.Parameters.AddWithValue("@PasswordHash", password.ConfirmPassword);
+
+
+                con.Open();
+                SqlParameter returnParameter = cmd.Parameters.Add("@ChangePasswordStatus", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+                cmd.ExecuteNonQuery();
+                int message = (int)returnParameter.Value;
+                con.Close();
+                return message;
+            }
+        }
     }
 }
