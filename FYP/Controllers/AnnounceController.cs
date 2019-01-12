@@ -58,7 +58,7 @@ namespace FYP.Controllers
 
                     string ImageName = System.IO.Path.GetFileName(file.FileName);
                     HttpPostedFileBase filebase = Request.Files.Get(0);
-                    var allowedExtensions = new string[] { ".jpg", ".tif", ".jpeg", ".png" };
+                    var allowedExtensions = new string[] { ".jpg",".jpeg", ".png" };
                     string extension = System.IO.Path.GetExtension(file.FileName);
 
                     if (allowedExtensions.Contains(extension))
@@ -83,7 +83,9 @@ namespace FYP.Controllers
                     }
                     else
                     {
-                            TempData["Error"] = "Invalid File Attached.";
+                        TempData["Error"] = "Invalid File Format Attached.";
+                        return View();
+
                     }
                 }
                 else
@@ -103,6 +105,20 @@ namespace FYP.Controllers
                 }
                 return View();
             }
+        }
+        [HttpGet]
+        public ActionResult Display_Announcement()
+        {
+
+            DisplayAnnouncement displayAnnouncement = new DisplayAnnouncement();
+            displayAnnouncement.Announcesdata = announcedata.GetAnnouncements();
+            return View(displayAnnouncement);
+        }
+
+        [HttpPost]
+        public ActionResult Display_Announcement(Announcement announce)
+        {
+            return View();
         }
     }
 }

@@ -69,6 +69,31 @@ namespace FYP.Models
             }
             return StatusData;
         }
+          public List<DisplayAnnouncement> GetAnnouncements()
+        {
+            List<DisplayAnnouncement> AnnouncementData = new List<DisplayAnnouncement>();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spGetAnnouncement", con);
+                cmd.CommandType = CommandType.StoredProcedure;
 
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+
+                    DisplayAnnouncement announcementList = new DisplayAnnouncement();
+                    announcementList.Title = rdr["Title"].ToString();
+                    announcementList.Content = rdr["Content"].ToString();
+                    announcementList.Path = rdr["APath"].ToString();
+                  
+                    AnnouncementData.Add(announcementList);
+                    //announcementList.Announcesdata = AnnouncementData;
+                }
+                con.Close();
+            }
+            return AnnouncementData;
+        }
     }
 }

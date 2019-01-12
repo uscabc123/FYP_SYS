@@ -109,7 +109,7 @@
                                 {
 
                             <td class="text-right">
-                                <span class="glyphicon glyphicon-pencil"> </span>@Html.ActionLink("Edit Consultation Record", "EditConsultation", "Consultation", new { cid = item.consultID }, null) |
+                                <span class="glyphicon glyphicon-pencil"> </span>@Html.ActionLink("Edit Consultation Record", "EditConsultation", "Consultation", new { cid = item.consultID , uid = item.patientid }, null) |
                                 <span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Contact Patient", "MessageBoard", "MessageBoard", new { cid = item.patientid }, null)
                             </td>
                                 }

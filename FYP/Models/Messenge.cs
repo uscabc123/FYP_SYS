@@ -13,7 +13,8 @@ namespace FYP.Models
         public string Receiver { get; set; }
         public string Sender { get; set; }
 
-        
+        public int Remark { get; set; }
+
         public DateTime MessageDateTime { get; set; }
         public List<Messenge> messageData { get; set; }
     }

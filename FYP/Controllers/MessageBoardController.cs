@@ -24,22 +24,21 @@ namespace FYP.Controllers
             {
                 message.Sender = Session["UserID"].ToString();
                 message.Receiver = cid;
-                message.messageData = messagedatalayer.GetMessage(message);
+                message.messageData = messagedatalayer.AddMessage(message);
                 if (message.messageData != null && message.messageData.Count > 0)
                 {
-                    message.MessageContent = "";
-                    ModelState.Remove("MessageContent");
+                    //message.MessageContent = "";
+                    //ModelState.Remove("MessageContent");
                     return View(message);
                 }
                 else
                 {
-                    message.MessageContent = " ";
-                    ModelState.Remove("MessageContent");
+                    //message.MessageContent = " ";
+                    //ModelState.Remove("MessageContent");
                     return View(message);
                 }
             }
 
-            return View();
         }
 
         [HttpPost]
@@ -52,16 +51,53 @@ namespace FYP.Controllers
             }
             else
             {
-                message.Sender = Session["UserID"].ToString();
-                message.Receiver = cid;
-                message.messageData = messagedatalayer.AddMessage(message);
-                if (message.messageData != null && message.messageData.Count > 0)
-                {
-                    message.MessageContent = "";
-                    ModelState.Remove("MessageContent");
-                }
-                return View(message);
+                    message.Sender = Session["UserID"].ToString();
+                    message.Receiver = cid;
+                    message.messageData = messagedatalayer.AddMessage(message);
+                    if (message.messageData != null && message.messageData.Count > 0)
+                    {
+                        message.MessageContent = "";
+                        ModelState.Remove("MessageContent");
+                    }
+                    return View(message);       
+                
+              
             }
+
         }
+
+
+        [HttpGet]
+        public ActionResult MessageList()
+        {
+            MessageList message = new MessageList();
+
+            if (string.IsNullOrEmpty(Session["UserID"] as string))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                message.UserID = Session["UserID"].ToString();
+                message.messageList = messagedatalayer.GetMessage(message);
+
+                if (message.messageList != null && message.messageList.Count > 0)
+                {
+                    return View(message);
+                }
+                return View();
+            }
+
+        }
+
+
+        //[HttpPost]
+        //public ActionResult MessageList(Messenge message, string cid)
+        //{
+
+        //    message.messageList = messagedatalayer.AddMessage(message);
+
+        //    return View();
+        //}
     }
 }

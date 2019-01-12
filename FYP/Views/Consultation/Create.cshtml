@@ -87,17 +87,14 @@
         using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-
             @Html.ValidationSummary(true)
-
-
             var followup = new List<SelectListItem>()
-{
+    {
 
-new SelectListItem() {  Value = "0", Text = "No"},
-new SelectListItem() {Value = "1", Text = "Yes"}
+        new SelectListItem() {  Value = "0", Text = "Yes"},
+        new SelectListItem() {Value = "1", Text = "No"}
 
-};
+    };
             ViewBag.followup = new SelectList(followup, "Value", "Text");
             <div class="input-group">
                 <span class="input-group-addon">Consultation Record</span>
@@ -141,10 +138,10 @@ new SelectListItem() {Value = "1", Text = "Yes"}
             </div>
 
 
-           
+
             <div class="form-group">
                 <label class="control-label">
-                   Follow up after consultation?
+                    Follow up after consultation?
                 </label>
 
                 @Html.DropDownListFor(m => m.followup, ViewBag.followup as SelectList, "-----Please select follow up status-----", new { @class = "form-control" })
@@ -159,6 +156,8 @@ new SelectListItem() {Value = "1", Text = "Yes"}
                     <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />
                 </div>
             </div>
+            <br />
+
         }
     }
 

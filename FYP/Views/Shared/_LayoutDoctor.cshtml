@@ -23,7 +23,7 @@
         .footer {
             width: 100%;
             height: 20px;
-            margin-top: 30px;
+            margin-top: 50px;
             margin-bottom: 0px;
             z-index: 12;
             position: fixed;
@@ -41,32 +41,42 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">@ViewBag.Title Doctor</a>
+                <a class="navbar-brand" href="#">Family Clinic</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Appointment</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="elements">Search Appointment</a></li>
+                            <li><a href="#" class="elements">Update Appointment</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Consultation</a>
                         <ul class="dropdown-menu">
-                            <li><a href="../Consultation/SearchConsultation" class="elements">Create Consultation</a></li>
-                            <li><a href="../Consultation/SearchConsultation" class="elements">Search Consulatation</a></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="../Consultation/Create" class="elements">New Consultation</a></li>
+                            <li><a href="../Consultation/SearchConsultation" class="elements">Search Consultation</a></li>
+                            <li><a href="../Consultation/SearchConsultation" class="elements">Edit Consultation</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Announcement</a>
                         <ul class="dropdown-menu">
-                            <li><a href="../Announce/Create" class="elements">Add Announcement</a></li>
-                            <li><a href="">Search Announcement</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="../Announce/Display_Announcement" class="elements">View Announcement</a></li>
+                            <li><a href="#">Search Announcement</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chat</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../Consultation/SearchConsultation" class="elements">Consultation Follow Up</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Feedback</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="elements"></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -84,7 +94,7 @@
                                     <span class="glyphicon glyphicon-log-out"></span>  @Session["Fname"] @Session["Lname"]
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="../Account/UserProfile"><span class="glyphicon glyphicon-info-sign"></span> Profile </a></li>
+                                    <li><a href="../Account/UserProfile"><span class="glyphicon glyphicon-info-sign"></span>My Profile </a></li>
                                     <li><a href="../Account/ChangePassword"><span class="glyphicon glyphicon-lock"></span> Change Password </a></li>
                                     <li><a href="../Account/Login"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
                                 </ul>
@@ -105,16 +115,14 @@
     <div class="navbar navbar-default footer">
         <div class="container">
             <p class="navbar-text pull-left">
-                © 2019 - Site Built By Mr. M.
+                ©2019 - All Rights Reserved 
             </p>
-            <a href="http://youtu.be/zJahlKPCL9g" class="navbar-btn btn-danger btn pull-right">
-                <span class="glyphicon glyphicon-star"></span>  Subscribe on YouTube
-            </a>
+           
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="@Url.Content("~/js/bootstrap.js")"></script>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
 </body>
 </html>

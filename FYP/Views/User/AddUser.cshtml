@@ -48,7 +48,7 @@ new SelectListItem() {Value = "1", Text = "Female"}
 
 
             <div class="form-group">
-               
+
                 <label class="control-label">
                     Full Name
                 </label>
@@ -103,24 +103,35 @@ new SelectListItem() {Value = "1", Text = "Female"}
                 @Html.ValidationMessageFor(model => model.PhoneNumber, null, new { @class = "text-danger" })
 
             </div>
-            <div class="form-group">
-                <label class="control-label">
-                    Account Status
-                </label>
+            @if (Session["RoleID"] != null)
+            {
 
-                @Html.DropDownListFor(m => m.UserStatusID, ViewBag.statusList as SelectList, "---Please Select Account Status---", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.UserStatusID, null, new { @class = "text-danger" })
-            </div>
+                if (Session["RoleID"].ToString() == "1")
+                {
+                    <div class="form-group">
+                        <label class="control-label">
+                            Account Status
+                        </label>
 
-            <div class="form-group">
-                <label class="control-label">
-                    User Role
-                </label>
+                        @Html.DropDownListFor(m => m.UserStatusID, ViewBag.statusList as SelectList, "---Please Select Account Status---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserStatusID, null, new { @class = "text-danger" })
+                    </div>
 
-                @Html.DropDownListFor(m => m.UserRoleID, ViewBag.Role as SelectList, "---Please Select User Role---", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.UserRoleID, null, new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label">
+                            User Role
+                        </label>
 
-            </div>
+                        @Html.DropDownListFor(m => m.UserRoleID, ViewBag.Role as SelectList, "---Please Select User Role---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserRoleID, null, new { @class = "text-danger" })
+
+                    </div>
+
+                }
+                else
+                {
+                }
+            }
 
 
         </div>
@@ -136,7 +147,3 @@ new SelectListItem() {Value = "1", Text = "Female"}
     </div>
 }
 
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

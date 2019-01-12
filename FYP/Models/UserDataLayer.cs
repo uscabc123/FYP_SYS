@@ -105,6 +105,9 @@ namespace FYP.Models
                     userdetail.FName = rdr["FirstName"].ToString();
                     userdetail.LName = rdr["LastName"].ToString();
                     userdetail.Gender = Convert.ToInt32(rdr["Gender"]);
+                    userdetail.UserRoleID = Convert.ToInt32(rdr["RoleID"]);
+                    userdetail.UserStatusID = Convert.ToInt32(rdr["StatusID"]);
+
                 }
                 con.Close();
                 return userdetail;

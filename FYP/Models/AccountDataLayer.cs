@@ -174,5 +174,30 @@ namespace FYP.Models
                 return message;
             }
         }
+
+
+        public Notification AccountNotification(Notification Noti)
+        {
+            Notification usernotification = new Notification();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spNotification", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserID", Noti.UserID);
+                cmd.Parameters.AddWithValue("@NotiNo", Noti.NotiID);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Noti.NotiID = Convert.ToInt32(rdr["NotificationNo"]);
+                }
+                return usernotification;
+
+            }
+
+        }
     }
 }

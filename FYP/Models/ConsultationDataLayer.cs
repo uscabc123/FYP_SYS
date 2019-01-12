@@ -53,7 +53,6 @@ namespace FYP.Models
                     consultation.patientid = rdr["ConsultPatient"].ToString();
                     consultation.remarks = rdr["Consultation_Remarks"].ToString();
                     consultation.symptoms = rdr["Patient_Symptoms"].ToString();
-                    //consultation.ConsultationDate = Convert.ToDateTime();
                     consultation.ConsultationDate = (DateTime)rdr["ConsultDateTime"];
                     consultationlist.Add(consultation);
                     consultation.consultsdata = consultationlist;
@@ -63,5 +62,52 @@ namespace FYP.Models
                 return consultationlist;
             }
         }
+
+        public Consultation ConsultationDetail(ConsultationSearch consultation)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("spGetConsultationInfo", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                Consultation ConsultDetail = new Consultation();
+
+                cmd.Parameters.AddWithValue("@ConsultationID", consultation.consultID);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    ConsultDetail.ConsultationId = rdr["ID"].ToString();
+                    ConsultDetail.diagnose = rdr["Patient_Diagnose"].ToString();
+                    ConsultDetail.patientid = rdr["ConsultPatient"].ToString();
+                    ConsultDetail.remarks = rdr["Consultation_Remarks"].ToString();
+                    ConsultDetail.symptoms = rdr["Patient_Symptoms"].ToString();
+                    ConsultDetail.ConsultationDate = (DateTime)rdr["ConsultDateTime"];
+                    ConsultDetail.followup = Convert.ToInt32(rdr["ConsultationStatus"]);
+                }
+                con.Close();
+                return ConsultDetail;
+            }
+        }
+
+
+         public void UpdateConsultationDetail(Consultation consultation)
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("spUpdateConsultation", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ConsultationID", consultation.ConsultationId);
+                    cmd.Parameters.AddWithValue("@Diagnose", consultation.diagnose);
+                    cmd.Parameters.AddWithValue("@Symptoms", consultation.symptoms);
+                    cmd.Parameters.AddWithValue("@Remarks", consultation.remarks);
+                    cmd.Parameters.AddWithValue("@Status", consultation.followup);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                }
+            }
     }
 }

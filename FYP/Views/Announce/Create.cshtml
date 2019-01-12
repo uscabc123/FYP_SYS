@@ -1,5 +1,7 @@
 ﻿@model FYP.Models.Announcement
-
+@{
+    ViewBag.Title = "Family Clinic";
+}
 
 @using (Html.BeginForm("Create", "Announce", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -51,6 +53,7 @@
                 <input type="submit" value="Submit" class="btn btn-success" Style="width: 120px" />
 
             </div>
+            <br />
 
         </div>
     </form>

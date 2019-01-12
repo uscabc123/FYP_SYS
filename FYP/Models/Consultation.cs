@@ -8,6 +8,7 @@ namespace FYP.Models
 {
     public class Consultation
     {
+        public string ConsultationId { get; set; }
         public User User { get; set; }
         public string remarks { get; set; }
         [Required]

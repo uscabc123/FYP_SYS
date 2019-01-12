@@ -11,13 +11,15 @@ namespace FYP.Controllers
     {
         UserDataLayer userdata = new UserDataLayer();
         ConsultationDataLayer consultdata = new ConsultationDataLayer();
+        Consultation profile = new Consultation();
+
         // GET: Consultation
         [HttpGet]
         public ActionResult Create(string uid)
         {
-            Consultation profile = new Consultation();
             if (uid == null)
             {
+                TempData["Empty"] = "Empty";
                 //ConsultationSearch search = new ConsultationSearch();
                 //profile.User = userdata.EditUser(search.patientid);
                 //ViewData["FName"] = profile.User.FName;
@@ -88,16 +90,7 @@ namespace FYP.Controllers
         [HttpGet]
         public ActionResult SearchConsultation()
         {
-            //ConsultationSearch consultlist = new ConsultationSearch();
-            //if (!string.IsNullOrEmpty(Session["UserID"] as string))
-            //{
-            //    consultation.userid = Session["UserID"].ToString();
-            //    consultation.UserRole = Session["RoleID"].ToString();
-            //    consultation.searchvalue = null;
-            //    consultlist.consultsdata = consultdata.SearchConsultation(consultation);
-            //} return View(consultlist);
             return View();
-
         }       
         [HttpPost]
         public ActionResult SearchConsultation(ConsultationSearch consultation, string cid)
@@ -118,32 +111,72 @@ namespace FYP.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult EditConsultation()
+        public ActionResult EditConsultation(int cid, string uid)
         {
-            //ConsultationSearch consultlist = new ConsultationSearch();
-            //if (!string.IsNullOrEmpty(Session["UserID"] as string))
-            //{
-            //    consultation.userid = Session["UserID"].ToString();
-            //    consultation.UserRole = Session["RoleID"].ToString();
-            //    consultation.searchvalue = null;
-            //    consultlist.consultsdata = consultdata.SearchConsultation(consultation);
-            //} return View(consultlist);
-            return View();
 
-        }
+                ConsultationSearch consult = new ConsultationSearch();
+                   consult.consultID = cid;
+                Consultation userconsult =  consultdata.ConsultationDetail(consult);
+
+            var followup = new List<SelectListItem>()
+    {
+
+                    new SelectListItem() {  Value = "1", Text = "Yes"},
+                    new SelectListItem() {Value = "0", Text = "No"}
+
+    };
+            ViewBag.followupstatus = new SelectList(followup, "Value", "Text", ViewData["followup"]);
+
+            profile.User = userdata.EditUser(uid);
+                ViewData["FName"] = profile.User.FName;
+                ViewData["LName"] = profile.User.LName;
+                ViewData["PhoneNumber"] = profile.User.PhoneNumber;
+                ViewData["UserID"] = profile.User.UserID;
+                ViewData["Email"] = profile.User.Email;
+                ViewData["ICPassport"] = profile.User.ICPassport;
+                ViewData["UserGender"] = profile.User.Gender;
+                Session["ConsultationID"] = userconsult.ConsultationId;
+                ViewData["diagnose"] = userconsult.diagnose;
+                ViewData["user_symptoms"] = userconsult.symptoms;
+                ViewData["user_remarks"] = userconsult.remarks;
+                ViewData["followup"] = userconsult.followup;
+                return View();
+       }
         [HttpPost]
-        public ActionResult EditConsultation(string cid)
+        public ActionResult EditConsultation(Consultation consult)
         {
-            //ConsultationSearch consultlist = new ConsultationSearch();
-            //if (!string.IsNullOrEmpty(Session["UserID"] as string))
-            //{
-            //    consultation.userid = Session["UserID"].ToString();
-            //    consultation.UserRole = Session["RoleID"].ToString();
-            //    consultation.searchvalue = null;
-            //    consultlist.consultsdata = consultdata.SearchConsultation(consultation);
-            //} return View(consultlist);
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(Session["ConsultationID"] as string))
+                {
 
-        }
+                    consult.ConsultationId = Session["ConsultationID"].ToString();
+                    var followup = new List<SelectListItem>()
+                    {
+
+                    new SelectListItem() {  Value = "1", Text = "Yes"},
+                    new SelectListItem() {Value = "0", Text = "No"}
+                    };
+                    ViewBag.followupstatus = new SelectList(followup, "Value", "Text", ViewData["followup"]);
+                }
+                TempData["Success"] = "Consultation Detail Updated Successfully!";
+
+                consultdata.UpdateConsultationDetail(consult);
+                return View();
+            }
+            else
+            {
+                var followup = new List<SelectListItem>()
+                {
+
+                    new SelectListItem() {  Value = "1", Text = "Yes"},
+                    new SelectListItem() {Value = "0", Text = "No"}
+
+                };
+                ViewBag.followupstatus = new SelectList(followup, "Value", "Text", ViewData["followup"]);
+            }
+            return View();
+            }
+        
     }
 }

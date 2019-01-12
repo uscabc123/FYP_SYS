@@ -236,150 +236,26 @@ namespace FYP.Controllers
 
         }
         [HttpGet]
-
-        public ActionResult Delete()
+        public ActionResult ViewUser(string uid)
         {
+            User profile = userdata.EditUser(uid);
+
+            ViewData["FName"] = profile.FName;
+            ViewData["LName"] = profile.LName;
+            ViewData["PhoneNumber"] = profile.PhoneNumber;
+            ViewData["UserID"] = profile.UserID;
+            ViewData["UserStatusID"] = profile.UserStatusID;
+            ViewData["UserRoleID"] = profile.UserRoleID;
+            ViewData["Email"] = profile.Email;
+            ViewData["ICPassport"] = profile.ICPassport;
+            ViewData["UserGender"] = profile.Gender;
+
+
             return View();
-
-
         }
 
+    
 
-
-        //[HttpGet]
-        //public ActionResult UserProfile()
-        //{
-
-        //    if (string.IsNullOrEmpty(Session["Email"] as string))
-        //    {
-        //        return RedirectToAction("Login", "UserLogin");
-
-        //    }
-        //    else
-        //    {
-        //        string emailvalue = Session["Email"].ToString();
-
-        //        User profile = userdata.Profile(emailvalue);
-
-        //        ViewData["FName"] = profile.FName;
-        //        ViewData["LName"] = profile.LName;
-        //        ViewData["PhoneNumber"] = profile.PhoneNumber;
-        //        ViewData["UserID"] = profile.UserID;
-        //        ViewData["Email"] = profile.Email;
-        //        ViewData["ICPassport"] = profile.ICPassport;
-        //        ViewData["UserGender"] = profile.Gender;
-        //        var genderlist = new List<SelectListItem>()
-        //    {
-        //    new SelectListItem() { Value = "0", Text = "Male"},
-        //    new SelectListItem() { Value = "1", Text = "Female"}
-
-        //    };
-        //        ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
-
-        //        return View();
-        //    }
-
-        //}
-        //[HttpPost]
-        //public ActionResult UserProfile(User user)
-        //{
-
-        //    if (string.IsNullOrEmpty(Session["Email"] as string))
-        //    {
-        //        return RedirectToAction("Login", "UserLogin");
-        //    }
-        //    else
-        //    {
-        //        user.UserID = Session["UserID"].ToString();
-
-        //        if (ModelState.IsValid)
-        //        {
-
-        //            ViewData["FName"] = user.FName;
-        //            ViewData["LName"] = user.LName;
-        //            ViewData["PhoneNumber"] = user.PhoneNumber;
-        //            ViewData["UserID"] = user.UserID;
-        //            ViewData["Email"] = user.Email;
-        //            ViewData["ICPassport"] = user.ICPassport;
-        //            ViewData["UserGender"] = user.Gender;
-
-        //            var genderlist = new List<SelectListItem>()
-        //            {
-        //                new SelectListItem() { Value = "0", Text = "Male"},
-        //                new SelectListItem() { Value = "1", Text = "Female"}
-        //            };
-        //            ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
-
-        //            return View();
-        //        }
-        //        else
-        //        {
-        //            int status = userdata.UpdateProfile(user);
-
-        //            if (status == 1)
-        //            {
-        //                ViewData["FName"] = user.FName;
-        //                ViewData["LName"] = user.LName;
-        //                ViewData["PhoneNumber"] = user.PhoneNumber;
-        //                ViewData["UserID"] = user.UserID;
-        //                ViewData["Email"] = user.Email;
-        //                ViewData["ICPassport"] = user.ICPassport;
-        //                ViewData["UserGender"] = user.Gender;
-        //                var genderlist = new List<SelectListItem>()
-        //                {
-        //                    new SelectListItem() { Value = "0", Text = "Male"},
-        //                    new SelectListItem() { Value = "1", Text = "Female"}
-        //                };
-        //                ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
-        //                TempData["Success"] = "User Profile Updated Successfully!";
-
-        //                return View();
-
-        //            }
-        //            else if (status == 2)
-
-        //            {
-        //                string emailvalue = Session["Email"].ToString();
-
-        //                User profile = userdata.Profile(emailvalue);
-
-        //                ViewData["FName"] = profile.FName;
-        //                ViewData["LName"] = profile.LName;
-        //                ViewData["PhoneNumber"] = profile.PhoneNumber;
-        //                ViewData["UserID"] = profile.UserID;
-        //                ViewData["Email"] = profile.Email;
-        //                ViewData["ICPassport"] = profile.ICPassport;
-        //                ViewData["UserGender"] = profile.Gender;
-
-        //                var genderlist = new List<SelectListItem>()
-        //                {
-        //                    new SelectListItem() { Value = "0", Text = "Male"},
-        //                    new SelectListItem() { Value = "1", Text = "Female"}
-        //                };
-        //                ViewBag.UserGender = new SelectList(genderlist, "Value", "Text", ViewData["UserGender"]);
-
-        //                TempData["Error"] = "Email has been used by other user account.";
-        //                return View();
-        //            }
-        //        }
-        //        return View();
-
-        //    }
-        //}
-       
-        //[HttpGet]
-        //public ActionResult ForgetPassword()
-        //{
-
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult ForgetPassword(string email)
-        //{
-
-        //    return View();
-        //}
 
     }
 

@@ -1,10 +1,12 @@
 ﻿@model FYP.Models.Messenge
 
 
+
+
 <style>
     .incoming_msg_img {
         display: inline-block;
-        width: 6%;
+        width: 50%;
         top: -100%;
     }
 
@@ -12,7 +14,7 @@
         display: inline-block;
         padding: 0 0 0 10px;
         vertical-align: top;
-        width: 92%;
+        width: 50%;
     }
 
     .type_msg {
@@ -38,6 +40,10 @@
     .scrollbar {
         height: 180px;
         overflow-y: scroll;
+        /*width: 115px;
+        height: 100px;
+        overflow: auto;
+        border: 2px black solid;*/
     }
 
     .received_withd_msg p {
@@ -77,39 +83,43 @@
         font-size: 12px;
         margin: 8px 0 0;
     }
-</style> 
-
+</style>
+@*<script>
+    var objDiv = document.getElementById("scrollbar");
+    objDiv.scrollTop = objDiv.scrollHeight;
+</script>*@
 <div class="container page-header">
     <fieldset>
-        <h1>Messenger</h1>
+        <h1>Create New Message</h1>
     </fieldset>
 </div>
-<div class="container scrollbar" id="chat-scroll" >
+<div class="container" id="chat-scroll">
 
     @if (Model == null)
     {
-
+        <h1 class="text-center">No Result</h1>
     }
     else
     {
-        foreach (var item in Model.messageData)
-        {
-            if (item.Sender.ToString() == Session["UserID"].ToString())
+        <div class="scrollbar">
+            @foreach (var item in Model.messageData)
             {
-                if (item.MessageID.ToString() == "0")
+                if (item.Sender.ToString() == Session["UserID"].ToString())
                 {
-                    <div class="outgoing_msg" >
-                        <div class="sent_msg">
-                            <p>
-                                @item.MessageContent
-                            </p>
-                            <span class="time_date"> @item.MessageDateTime</span>
+                    if (item.Remark.ToString() == "0")
+                    {
+                        <div class="outgoing_msg">
+                            <div class="sent_msg">
+                                <p>
+                                    @item.MessageContent
+                                </p>
+                                <span class="time_date"> @item.MessageDateTime</span>
+                            </div>
                         </div>
-                    </div>
-                }
-                else if (item.MessageID.ToString() == "1")
-                {
-                    <div class="incoming_msg">
+                    }
+                    else if (item.Remark.ToString() == "1")
+                    {
+                        @*<div class="incoming_msg">*@
                         <div class="received_msg">
                             <div class="received_withd_msg">
                                 <p>
@@ -118,25 +128,25 @@
                                 <span class="time_date"> @item.MessageDateTime</span>
                             </div>
                         </div>
-                    </div>
+                        @*</div>*@
+                    }
                 }
-            }
-            else if (item.Receiver.ToString() == Session["UserID"].ToString())
-            {
-                if (item.MessageID.ToString() == "1")
+                else if (item.Receiver.ToString() == Session["UserID"].ToString())
                 {
-                    <div class="outgoing_msg">
-                        <div class="sent_msg">
-                            <p>
-                                @item.MessageContent
-                            </p>
-                            <span class="time_date"> @item.MessageDateTime</span>
+                    if (item.Remark.ToString() == "1")
+                    {
+                        <div class="outgoing_msg">
+                            <div class="sent_msg">
+                                <p>
+                                    @item.MessageContent
+                                </p>
+                                <span class="time_date"> @item.MessageDateTime</span>
+                            </div>
                         </div>
-                    </div>
-                }
-                else if (item.MessageID.ToString() == "0")
-                {
-                    <div class="incoming_msg">
+                    }
+                    else if (item.Remark.ToString() == "0")
+                    {
+                        @*<div class="incoming_msg">*@
                         <div class="received_msg">
                             <div class="received_withd_msg">
                                 <p>
@@ -145,14 +155,16 @@
                                 <span class="time_date"> @item.MessageDateTime</span>
                             </div>
                         </div>
-                    </div>
+                        @*</div>*@
+                    }
                 }
+
+            }        </div>
+
             }
-        }
-    }
 
 
-</div>
+    </div>
 
 @using (Html.BeginForm())
 {

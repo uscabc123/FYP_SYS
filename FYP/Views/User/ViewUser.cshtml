@@ -1,0 +1,130 @@
+﻿@model FYP.Models.User
+
+@using (Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+
+    <form>
+        <div class="container">
+            <div class="page-header">
+                <fieldset>
+                    <h1>View User Profile</h1>
+                </fieldset>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    User ID
+
+                </label>
+                <div class="form-control">
+
+                    @ViewData["UserID"]
+                </div>
+
+
+            </div>
+            <div class="form-group">
+
+                <label class="control-label">
+                    Full Name
+                </label>
+                <div class="form-control">
+
+                    @ViewData["FName"] @ViewData["LName"]
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Gender
+                </label>
+                @if (ViewData["UserGender"] != null)
+                {
+                    if (ViewData["UserGender"].ToString() == "0")
+                    {
+                        <div class="form-control">
+                            Male
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-control">
+                            Female
+                        </div>
+                    }
+                }
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">
+                    Email
+                </label>
+                <div class="form-control">
+                    @ViewData["Email"]
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    IC/Passport No.
+                </label>
+                <div class="form-control">
+                    @ViewData["ICPassport"]
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Contact Number
+                </label>
+                <div class="form-control">
+                    @ViewData["PhoneNumber"]
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">
+                    Role
+                </label>
+
+
+                @if (ViewData["UserRoleID"] != null)
+                {
+                    if (ViewData["UserRoleID"].ToString() == "1")
+                    {
+                        <div class="form-control">
+                            Admin
+                        </div>
+                    }
+                    else if (ViewData["UserRoleID"].ToString() == "2")
+                    {
+                        <div class="form-control">
+                            Doctor
+                        </div>
+                    }
+                    else if (ViewData["UserRoleID"].ToString() == "3")
+                    {
+
+                        <div class="form-control">
+                            Nurse
+                        </div>
+                    }
+                    else if (ViewData["UserRoleID"].ToString() == "4")
+                    {
+                        <div class="form-control">
+                            Patient
+                        </div>
+                    }
+                }
+            </div>
+        
+            <br />
+        </div>
+    </form> 
+
+}
+
+
+
+

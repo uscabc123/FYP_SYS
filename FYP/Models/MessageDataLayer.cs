@@ -32,7 +32,7 @@ namespace FYP.Models
                 while (rdr.Read())
                 {
                     Messenge messengedetail = new Messenge();
-                    messengedetail.MessageID = Convert.ToInt32(rdr["remark"]);
+                    messengedetail.Remark= Convert.ToInt32(rdr["remark"]);
                     messengedetail.MessageContent = rdr["MessageContent"].ToString();
                     messengedetail.MessageDateTime = (DateTime)rdr["messagedatetime"];
                     messengedetail.Sender = rdr["Sender"].ToString();
@@ -46,31 +46,31 @@ namespace FYP.Models
         
         }
 
-        public List<Messenge> GetMessage(Messenge messageboard)
+        public List<MessageList> GetMessage(MessageList messageboard)
         {
-            List<Messenge> mlist = new List<Messenge>();
+            List<MessageList> mlist = new List<MessageList>();
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("spAddMessage", con);
+                SqlCommand cmd = new SqlCommand("spGetMessageList", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@SenderID", messageboard.Sender);
-                cmd.Parameters.AddWithValue("@ReceiverID", messageboard.Receiver);
+                cmd.Parameters.AddWithValue("@SenderID", messageboard.UserID);
 
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
-
+                MessageList messengedetail = new MessageList();
                 while (rdr.Read())
                 {
-                    Messenge messengedetail = new Messenge();
-                    messengedetail.MessageID = Convert.ToInt32(rdr["remark"]);
-                    messengedetail.MessageContent = rdr["MessageContent"].ToString();
-                    messengedetail.MessageDateTime = (DateTime)rdr["messagedatetime"];
+                    
                     messengedetail.Sender = rdr["Sender"].ToString();
+                    messengedetail.FirstName = rdr["FirstName"].ToString();
+                    messengedetail.LastName = rdr["LastName"].ToString();
+                    messengedetail.Sender_ReceiverID = rdr["UserID"].ToString();
                     messengedetail.Receiver = rdr["Receiver"].ToString();
+
                     mlist.Add(messengedetail);
-                    messengedetail.messageData = mlist;
+                    messengedetail.messageList = mlist;
                 }
                 con.Close();
             }
